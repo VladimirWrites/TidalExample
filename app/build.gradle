@@ -1,0 +1,51 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdk Versions.compile_sdk
+
+    defaultConfig {
+        applicationId "dev.vladimirj.tidal"
+        minSdk Versions.min_sdk
+        targetSdk Versions.target_sdk
+        versionCode Versions.version_code
+        versionName Versions.version_name
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
+    }
+    buildFeatures {
+        dataBinding = true
+    }
+}
+
+dependencies {
+    implementation project(Modules.baseUi)
+
+    implementation project(Modules.searchData)
+    implementation project(Modules.searchDomain)
+    implementation project(Modules.searchUi)
+
+    implementation Deps.hilt_android
+    kapt Deps.hilt_compiler
+
+    implementation Deps.material_design
+    implementation Deps.constraint_layout
+    implementation Deps.appcompat
+
+}

@@ -1,0 +1,48 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdk Versions.compile_sdk
+
+    defaultConfig {
+        minSdk Versions.min_sdk
+        targetSdk Versions.target_sdk
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
+    }
+}
+
+dependencies {
+    implementation project(Modules.searchDomain)
+
+    implementation Deps.kotlin_coroutines_android
+
+    implementation Deps.moshi
+    implementation Deps.retrofit
+
+    implementation Deps.hilt_android
+    kapt Deps.hilt_compiler
+
+    testImplementation Deps.junit
+    testImplementation Deps.truth
+    testImplementation Deps.mockito_kotlin
+    testImplementation Deps.mockito_inline
+    testImplementation Deps.kotlin_coroutines_test
+}
