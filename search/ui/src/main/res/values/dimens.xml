@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="artist_logo_size">64dp</dimen>
+    <dimen name="artist_logo_padding">16dp</dimen>
+    <dimen name="search_text_padding">8dp</dimen>
+    <dimen name="button_cancel_size">24dp</dimen>
+</resources>

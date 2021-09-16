@@ -1,4 +1,4 @@
-package dev.vladimirj.base.ui
+package dev.vladimirj.tidal.base.ui
 
 open class Event<out T>(private val content: T) {
 

@@ -1,4 +1,4 @@
-package dev.vladimirj.base.ui
+package dev.vladimirj.tidal.base.ui
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData

@@ -1,6 +1,7 @@
-package dev.vladimirj.base.ui
+package dev.vladimirj.tidal.base.ui
 
 import android.view.View
+import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 
 @BindingAdapter("goneUnless")

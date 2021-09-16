@@ -1,4 +1,4 @@
-package dev.vladimirj.base.ui
+package dev.vladimirj.tidal.base.ui
 
 import kotlinx.coroutines.CoroutineDispatcher
 

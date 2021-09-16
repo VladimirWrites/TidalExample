@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Tidal Example</string>
+    <string name="hint_search">Search</string>
+    <string name="artists">Artists</string>
+</resources>

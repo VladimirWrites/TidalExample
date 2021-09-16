@@ -35,7 +35,9 @@ dependencies {
     implementation Deps.kotlin_coroutines_android
 
     implementation Deps.moshi
+    implementation Deps.moshi_codegen
     implementation Deps.retrofit
+    implementation Deps.retrofit_moshi_converter
 
     implementation Deps.hilt_android
     kapt Deps.hilt_compiler

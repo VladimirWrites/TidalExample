@@ -12,8 +12,9 @@ object Versions {
     const val android_x_databinding_compiler = "4.1.0"
 
     const val moshi = "1.12.0"
-
     const val retrofit = "2.9.0"
+
+    const val glide = "4.12.0"
 
     const val junit = "4.13.1"
     const val mockito = "3.5.15"
@@ -52,7 +53,12 @@ object Deps {
     const val lifecycle = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.android_x_lifecycle}"
 
     const val moshi = "com.squareup.moshi:moshi:${Versions.moshi}"
+    const val moshi_codegen = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}"
+    const val retrofit_moshi_converter = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+
+    const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
+    const val glide_compiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
 
     const val hilt_android = "com.google.dagger:hilt-android:${Versions.hilt}"
     const val hilt_compiler = "com.google.dagger:hilt-compiler:${Versions.hilt}"

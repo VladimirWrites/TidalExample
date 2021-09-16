@@ -11,6 +11,8 @@ android {
         targetSdkVersion Versions.target_sdk
         versionCode 1
         versionName "1.0"
+
+        testOptions.unitTests.includeAndroidResources = true
     }
 
     buildTypes {
@@ -37,11 +39,21 @@ dependencies {
     implementation Deps.hilt_android
     kapt Deps.hilt_compiler
 
+    implementation Deps.glide
+    kapt Deps.glide_compiler
+
     testImplementation Deps.junit
     testImplementation Deps.truth
     testImplementation Deps.mockito_kotlin
     testImplementation Deps.mockito_inline
     testImplementation Deps.kotlin_coroutines_test
+    testImplementation Deps.arch_core_testing
+    testImplementation Deps.test_core_ktx
+    testImplementation Deps.robolectric
+    testImplementation Deps.espresso_core
+
+    testImplementation Deps.hilt_test
+    kaptTest Deps.hilt_android_compiler
 
     kaptTest Deps.databinding_compiler
 }

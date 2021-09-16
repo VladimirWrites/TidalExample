@@ -43,9 +43,4 @@ dependencies {
 
     implementation Deps.hilt_android
     kapt Deps.hilt_compiler
-
-    implementation Deps.material_design
-    implementation Deps.constraint_layout
-    implementation Deps.appcompat
-
 }
