@@ -12,10 +12,13 @@ import dev.vladimirj.tidal.base.ui.observe
 import dev.vladimirj.tidal.base.ui.observeEvent
 import dev.vladimirj.tidal.search.ui.albums.AlbumsViewModel.UiEvent.ShowError
 import dev.vladimirj.tidal.search.ui.R
+import dev.vladimirj.tidal.search.ui.SearchNavigator
 import dev.vladimirj.tidal.search.ui.albums.AlbumsViewModel.UiEvent.GoToTracks
 import dev.vladimirj.tidal.search.ui.artists.ParcelableArtist
 import dev.vladimirj.tidal.search.ui.artists.toArtist
+import dev.vladimirj.tidal.search.ui.artists.toParcelableArtist
 import dev.vladimirj.tidal.search.ui.databinding.FragmentAlbumsBinding
+import javax.inject.Inject
 
 private const val ARG_ARTIST = "artist"
 
@@ -27,6 +30,9 @@ class AlbumsFragment: Fragment(R.layout.fragment_albums) {
 
     private val adapter = AlbumsAdapter()
 
+    @Inject
+    lateinit var navigator: SearchNavigator
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAlbumsBinding.bind(view)
@@ -35,7 +41,11 @@ class AlbumsFragment: Fragment(R.layout.fragment_albums) {
 
         observeEvent(viewModel.uiEvents) {
             when (it) {
-                is GoToTracks -> TODO()
+                is GoToTracks -> navigator.goToAlbumDetails(
+                    requireActivity(),
+                    it.artist.toParcelableArtist(),
+                    it.album.toParcelableAlbum()
+                )
                 is ShowError -> Snackbar.make(binding.root, it.message, Snackbar.LENGTH_LONG).show()
             }
         }

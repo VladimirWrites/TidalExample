@@ -3,4 +3,5 @@
     <string name="hint_search">Search</string>
     <string name="artists">Artists</string>
     <string name="albums">Albums</string>
+    <string name="volume_count">Volume %d</string>
 </resources>

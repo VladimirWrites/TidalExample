@@ -3,6 +3,7 @@ package dev.vladimirj.tidal.search.data
 import dev.vladimirj.tidal.search.data.entity.RemoteAlbum
 import dev.vladimirj.tidal.search.data.entity.RemoteArtist
 import dev.vladimirj.tidal.search.data.entity.RemoteResponse
+import dev.vladimirj.tidal.search.data.entity.RemoteTrack
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -28,4 +29,10 @@ interface SearchService {
     suspend fun getMoreAlbums(
         @Url url: String
     ): RemoteResponse<RemoteAlbum>
+
+    @GET("album/{album_id}/tracks")
+    suspend fun getTracks(
+        @Path("album_id") albumId: Long,
+        @Query("limit") limit: Int = 300 // Record for most tracks on one album is 300 and is held by album 'Modern Day Masterpiece' by Orlando “Jahlil Beats” Tucker. TODO: Add pagination and remove limit
+    ): RemoteResponse<RemoteTrack>
 }

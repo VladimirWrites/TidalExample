@@ -7,4 +7,5 @@ interface ArtistRepository {
     suspend fun getMoreSearchResults(url: String): DomainResult
     suspend fun getAlbums(artistId: Long): DomainResult
     suspend fun getMoreAlbums(url: String): DomainResult
+    suspend fun getTracks(albumId: Long): DomainResult
 }

@@ -5,4 +5,10 @@
     <dimen name="search_text_padding">8dp</dimen>
     <dimen name="button_cancel_size">24dp</dimen>
     <dimen name="album_card_padding">8dp</dimen>
+    <dimen name="album_header_image_padding">64dp</dimen>
+    <dimen name="album_header_image_padding_bottom">32dp</dimen>
+    <dimen name="album_header_text_padding">8dp</dimen>
+    <dimen name="album_header_text_padding_bottom">32dp</dimen>
+
+    <dimen name="track_item_padding">16dp</dimen>
 </resources>

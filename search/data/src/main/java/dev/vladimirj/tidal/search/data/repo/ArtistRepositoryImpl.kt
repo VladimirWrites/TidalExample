@@ -8,6 +8,7 @@ import dev.vladimirj.tidal.search.domain.entity.Artist
 import dev.vladimirj.tidal.search.domain.repo.ArtistRepository
 import dev.vladimirj.tidal.search.domain.DomainResult
 import dev.vladimirj.tidal.search.domain.entity.Album
+import dev.vladimirj.tidal.search.domain.entity.Track
 
 class ArtistRepositoryImpl(
     private val searchService: SearchService
@@ -26,6 +27,23 @@ class ArtistRepositoryImpl(
 
     override suspend fun getMoreAlbums(url: String): DomainResult {
         return getAlbumsAndMapThem { searchService.getMoreAlbums(url) }
+    }
+
+    override suspend fun getTracks(albumId: Long): DomainResult {
+        return try {
+            val result = searchService.getTracks(albumId)
+            val listOfTrack = result.data.map {
+                Track(
+                    id = it.id,
+                    title = it.title,
+                    trackPosition = it.trackPosition,
+                    diskNumber = it.diskNumber
+                )
+            }
+            DomainResult.Success(listOfTrack, result.total, result.next)
+        } catch (throwable: Throwable) {
+            DomainResult.Error(throwable.localizedMessage)
+        }
     }
 
     private suspend fun getSearchResultsAndMapThem(provider: (suspend () -> RemoteResponse<RemoteArtist>)): DomainResult {

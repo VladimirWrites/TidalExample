@@ -57,7 +57,7 @@ class AlbumsViewModel @Inject constructor(
                         result.data.forEach {
                             val album = it as Album
                             aggregatedSearchResults.add(album.toAlbumUiModel(currentArtist) {
-                                mutableUiEvents.postValue(Event(UiEvent.GoToTracks(album)))
+                                mutableUiEvents.postValue(Event(UiEvent.GoToTracks(currentArtist, album)))
                             })
                         }
                         mutableAlbumResults.postValue(aggregatedSearchResults)
@@ -90,7 +90,7 @@ class AlbumsViewModel @Inject constructor(
                         result.data.forEach {
                             val album = it as Album
                             aggregatedSearchResults.add(album.toAlbumUiModel(currentArtist) {
-                                mutableUiEvents.postValue(Event(UiEvent.GoToTracks(album)))
+                                mutableUiEvents.postValue(Event(UiEvent.GoToTracks(currentArtist, album)))
                             })
                         }
                         mutableAlbumResults.postValue(aggregatedSearchResults)
@@ -105,6 +105,6 @@ class AlbumsViewModel @Inject constructor(
 
     sealed class UiEvent {
         data class ShowError(val message: String) : UiEvent()
-        data class GoToTracks(val artist: Album) : UiEvent()
+        data class GoToTracks(val artist: Artist, val album: Album) : UiEvent()
     }
 }
