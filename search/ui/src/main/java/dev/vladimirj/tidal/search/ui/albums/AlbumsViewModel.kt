@@ -1,7 +1,10 @@
 package dev.vladimirj.tidal.search.ui.albums
 
 import androidx.databinding.ObservableBoolean
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.vladimirj.tidal.base.ui.CoroutineDispatcherProvider
 import dev.vladimirj.tidal.base.ui.Event
@@ -10,7 +13,6 @@ import dev.vladimirj.tidal.search.domain.entity.Album
 import dev.vladimirj.tidal.search.domain.entity.Artist
 import dev.vladimirj.tidal.search.domain.usecase.GetAlbums
 import dev.vladimirj.tidal.search.domain.usecase.GetMoreAlbums
-import dev.vladimirj.tidal.search.ui.artists.SearchResultsUiModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

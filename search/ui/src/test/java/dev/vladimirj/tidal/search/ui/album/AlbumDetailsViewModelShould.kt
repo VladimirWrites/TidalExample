@@ -5,10 +5,10 @@ import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import dev.vladimirj.tidal.base.ui.CoroutineDispatcherProvider
-import dev.vladimirj.tidal.search.domain.usecase.GetAlbums
-import dev.vladimirj.tidal.search.domain.usecase.GetMoreAlbums
 import dev.vladimirj.tidal.search.domain.usecase.GetTracks
-import dev.vladimirj.tidal.search.ui.stubs.*
+import dev.vladimirj.tidal.search.ui.stubs.ALBUM_1
+import dev.vladimirj.tidal.search.ui.stubs.ALBUM_DETAILS_RESULT_SUCCESS
+import dev.vladimirj.tidal.search.ui.stubs.ARTIST_1
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest

@@ -1,8 +1,7 @@
 package dev.vladimirj.tidal
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.databinding.ViewDataBinding
+import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dev.vladimirj.tidal.search.ui.SearchNavigator
 import javax.inject.Inject

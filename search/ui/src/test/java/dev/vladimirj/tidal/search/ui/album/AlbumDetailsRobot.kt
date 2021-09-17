@@ -2,7 +2,7 @@ package dev.vladimirj.tidal.search.ui.album
 
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withText
-import dev.vladimirj.tidal.search.ui.albums.AlbumsInteractions.snackbar
+import dev.vladimirj.tidal.search.ui.album.AlbumDetailsInteractions.snackbar
 
 fun albumDetailsScreen(block: AlbumDetailsRobot.() -> Unit): AlbumDetailsRobot {
     return AlbumDetailsRobot().apply { block() }
