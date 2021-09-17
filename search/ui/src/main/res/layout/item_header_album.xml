@@ -18,54 +18,54 @@
 
         <ImageView
             android:id="@+id/image_album_art"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:imageUrl="@{uiModel.album.cover}"
+            android:layout_width="@dimen/album_header_image_size"
+            android:layout_height="@dimen/album_header_image_size"
             android:layout_marginStart="@dimen/album_header_image_padding"
-            android:layout_marginEnd="@dimen/album_header_image_padding"
             android:layout_marginTop="@dimen/album_header_image_padding"
+            android:layout_marginEnd="@dimen/album_header_image_padding"
             android:layout_marginBottom="@dimen/album_header_image_padding_bottom"
+            app:imageUrl="@{uiModel.album.cover}"
             app:layout_constraintBottom_toTopOf="@+id/text_title"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-            android:text="@{uiModel.album.title}"
-            android:paddingStart="@dimen/screen_padding"
-            android:paddingEnd="@dimen/screen_padding"
-            android:maxLines="1"
             android:ellipsize="end"
             android:gravity="start"
+            android:maxLines="1"
+            android:paddingStart="@dimen/screen_padding"
+            android:paddingEnd="@dimen/screen_padding"
+            android:text="@{uiModel.album.title}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             app:layout_constraintBottom_toTopOf="@id/text_artist_name"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/image_album_art"
-            tools:text="St. Anger"/>
+            tools:text="St. Anger" />
 
         <TextView
             android:id="@+id/text_artist_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            android:text="@{uiModel.artist.name}"
-            android:paddingStart="@dimen/screen_padding"
-            android:paddingEnd="@dimen/screen_padding"
-            android:paddingTop="@dimen/album_header_text_padding"
-            android:paddingBottom="@dimen/album_header_text_padding_bottom"
-            android:maxLines="1"
             android:ellipsize="end"
             android:gravity="start"
+            android:maxLines="1"
+            android:paddingStart="@dimen/screen_padding"
+            android:paddingTop="@dimen/album_header_text_padding"
+            android:paddingEnd="@dimen/screen_padding"
+            android:paddingBottom="@dimen/album_header_text_padding_bottom"
+            android:text="@{uiModel.artist.name}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             android:textColor="@color/teal_700"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_title"
-            tools:text="Metallica"/>
+            tools:text="Metallica" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

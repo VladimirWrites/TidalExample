@@ -7,6 +7,7 @@
     <dimen name="album_card_padding">8dp</dimen>
     <dimen name="album_header_image_padding">64dp</dimen>
     <dimen name="album_header_image_padding_bottom">32dp</dimen>
+    <dimen name="album_header_image_size">256dp</dimen>
     <dimen name="album_header_text_padding">8dp</dimen>
     <dimen name="album_header_text_padding_bottom">32dp</dimen>
 
