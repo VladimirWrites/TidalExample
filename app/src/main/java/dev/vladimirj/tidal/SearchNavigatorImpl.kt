@@ -9,7 +9,7 @@ import dev.vladimirj.tidal.search.ui.albums.AlbumsFragment
 import dev.vladimirj.tidal.search.ui.albums.ParcelableAlbum
 import dev.vladimirj.tidal.search.ui.artists.ParcelableArtist
 
-class SearchNavigatorImpl: SearchNavigator {
+class SearchNavigatorImpl : SearchNavigator {
 
     override fun goToSearch(activity: FragmentActivity) {
         navigateToFragment(activity, SearchFragment.newInstance(), SearchFragment.TAG)
@@ -19,12 +19,34 @@ class SearchNavigatorImpl: SearchNavigator {
         navigateToFragment(activity, AlbumsFragment.newInstance(artist), AlbumsFragment.TAG, true)
     }
 
-    override fun goToAlbumDetails(activity: FragmentActivity, artist: ParcelableArtist, album: ParcelableAlbum) {
-        navigateToFragment(activity, AlbumDetailsFragment.newInstance(artist, album), AlbumDetailsFragment.TAG, true)
+    override fun goToAlbumDetails(
+        activity: FragmentActivity,
+        artist: ParcelableArtist,
+        album: ParcelableAlbum
+    ) {
+        navigateToFragment(
+            activity,
+            AlbumDetailsFragment.newInstance(artist, album),
+            AlbumDetailsFragment.TAG,
+            true
+        )
     }
 
-    private fun navigateToFragment(activity: FragmentActivity, fragment: Fragment, tag: String, addToBackStack: Boolean = false) {
+    private fun navigateToFragment(
+        activity: FragmentActivity,
+        fragment: Fragment,
+        tag: String,
+        addToBackStack: Boolean = false
+    ) {
         val ft = activity.supportFragmentManager.beginTransaction()
+
+        ft.setCustomAnimations(
+            R.anim.slide_in_right,
+            R.anim.slide_out_left,
+            R.anim.slide_in_left ,
+            R.anim.slide_out_right
+        )
+
         ft.replace(R.id.fragment_container, fragment, tag)
         if (addToBackStack) {
             ft.addToBackStack(tag)
