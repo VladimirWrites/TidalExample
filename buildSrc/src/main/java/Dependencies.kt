@@ -1,15 +1,14 @@
 object Versions {
-    const val kotlin = "1.5.21"
-    const val kotlin_coroutines = "1.5.1"
+    const val kotlin = "1.5.30"
+    const val kotlin_coroutines = "1.5.2"
 
     const val android_x_fragment = "1.3.6"
-    const val appcompat = "1.2.0"
-    const val android_x_core_ktx = "1.3.2"
-    const val android_x_lifecycle = "2.2.0"
-    const val android_x_constraint_layout = "2.0.2"
-    const val material_design = "1.2.1"
-    const val android_x_work_manager = "2.4.0"
-    const val android_x_databinding_compiler = "4.1.0"
+    const val appcompat = "1.3.1"
+    const val android_x_core_ktx = "1.6.0"
+    const val android_x_lifecycle = "2.3.1"
+    const val android_x_constraint_layout = "2.1.0"
+    const val material_design = "1.4.0"
+    const val android_x_databinding_compiler = "7.0.2"
     const val android_x_recycler = "1.2.1"
 
     const val moshi = "1.12.0"
@@ -17,14 +16,14 @@ object Versions {
 
     const val glide = "4.12.0"
 
-    const val junit = "4.13.1"
-    const val mockito = "3.5.15"
+    const val junit = "4.13.2"
+    const val mockito = "3.12.4"
     const val mockito_kotlin = "2.2.0"
-    const val truth = "1.1"
-    const val robolectric = "4.4"
+    const val truth = "1.1.3"
+    const val robolectric = "4.5.1"
     const val arch_core_testing = "2.1.0"
-    const val fragment_test = "1.2.5"
-    const val espresso_core = "3.3.0"
+    const val fragment_test = "1.3.6"
+    const val espresso_core = "3.4.0"
     const val test_core_ktx = "1.3.0"
 
     const val gradle_android = "7.0.2"
@@ -78,7 +77,6 @@ object Deps {
     const val espresso_core = "androidx.test.espresso:espresso-core:${Versions.espresso_core}"
     const val espresso_contrib = "androidx.test.espresso:espresso-contrib:${Versions.espresso_core}"
     const val test_core_ktx = "androidx.test:core-ktx:${Versions.test_core_ktx}"
-    const val work_manager_test = "androidx.work:work-testing:${Versions.android_x_work_manager}"
 
     const val android_gradle_plugin = "com.android.tools.build:gradle:${Versions.gradle_android}"
     const val kotlin_gradle_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
