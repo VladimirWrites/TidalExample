@@ -8,9 +8,9 @@ import dev.vladimirj.tidal.base.ui.CoroutineDispatcherProvider
 import dev.vladimirj.tidal.base.ui.Event
 import dev.vladimirj.tidal.base.ui.addOnPropertyChanged
 import dev.vladimirj.tidal.base.ui.debounce
+import dev.vladimirj.tidal.search.domain.DomainResult
 import dev.vladimirj.tidal.search.domain.usecase.LoadMoreArtists
 import dev.vladimirj.tidal.search.domain.usecase.SearchArtists
-import dev.vladimirj.tidal.search.domain.SearchArtistsResult
 import dev.vladimirj.tidal.search.domain.entity.Artist
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -71,13 +71,14 @@ class SearchViewModel @Inject constructor(
             withContext(coroutineDispatcherProvider.main) {
                 isProgressVisible.set(false)
                 when (result) {
-                    is SearchArtistsResult.Success -> {
+                    is DomainResult.Success<*> -> {
                         nextResults = result.next
                         val aggregatedSearchResults = mutableListOf<SearchResultsUiModel>(
                             SearchResultsUiModel.HeaderUiModel
                         )
 
-                        result.artists.forEach { artist ->
+                        result.data.forEach {
+                            val artist = it as Artist
                             aggregatedSearchResults.add(artist.toArtistUiModel {
                                 mutableUiEvents.postValue(Event(UiEvent.GoToAlbums(artist)))
                             })
@@ -85,7 +86,7 @@ class SearchViewModel @Inject constructor(
                         mutableSearchResults.postValue(aggregatedSearchResults)
                         mutableUiEvents.postValue(Event(UiEvent.ScrollToTop))
                     }
-                    is SearchArtistsResult.Error -> {
+                    is DomainResult.Error -> {
                         mutableUiEvents.postValue(Event(UiEvent.ShowError(result.message)))
                     }
                 }
@@ -103,20 +104,21 @@ class SearchViewModel @Inject constructor(
             withContext(coroutineDispatcherProvider.main) {
                 isProgressVisible.set(false)
                 when (result) {
-                    is SearchArtistsResult.Success -> {
+                    is DomainResult.Success<*> -> {
                         val aggregatedSearchResults = if(searchResults.value.isNullOrEmpty())
                             mutableListOf<SearchResultsUiModel>(SearchResultsUiModel.HeaderUiModel)
                         else searchResults.value!!.toMutableList()
                         nextResults = result.next
 
-                        result.artists.forEach { artist ->
+                        result.data.forEach {
+                            val artist = it as Artist
                             aggregatedSearchResults.add(artist.toArtistUiModel {
                                 mutableUiEvents.postValue(Event(UiEvent.GoToAlbums(artist)))
                             })
                         }
                         mutableSearchResults.postValue(aggregatedSearchResults)
                     }
-                    is SearchArtistsResult.Error -> {
+                    is DomainResult.Error -> {
                         mutableUiEvents.postValue(Event(UiEvent.ShowError(result.message)))
                     }
                 }

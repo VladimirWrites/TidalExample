@@ -9,10 +9,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.vladimirj.tidal.base.ui.addOnScrolledToBottom
 import dev.vladimirj.tidal.base.ui.observe
 import dev.vladimirj.tidal.base.ui.observeEvent
-import dev.vladimirj.tidal.search.ui.artists.SearchViewModel.UiEvent.ShowError
 import dev.vladimirj.tidal.search.ui.databinding.FragmentSearchBinding
 import dev.vladimirj.tidal.search.ui.R
-import dev.vladimirj.tidal.search.ui.artists.SearchViewModel.UiEvent.ScrollToTop
+import dev.vladimirj.tidal.search.ui.SearchNavigator
+import dev.vladimirj.tidal.search.ui.artists.SearchViewModel.UiEvent.*
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SearchFragment : Fragment(R.layout.fragment_search) {
@@ -21,6 +22,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private lateinit var binding: FragmentSearchBinding
 
     private val adapter = SearchResultsAdapter()
+
+    @Inject
+    lateinit var navigator: SearchNavigator
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,6 +38,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                     Snackbar.make(binding.root, it.message, Snackbar.LENGTH_LONG).show()
                 }
                 is ScrollToTop -> binding.recyclerArtists.scrollToPosition(0)
+                is GoToAlbums -> navigator.goToAlbums(requireActivity(), it.artist.toParcelableArtist())
             }
         }
         observe(viewModel.searchResults) {

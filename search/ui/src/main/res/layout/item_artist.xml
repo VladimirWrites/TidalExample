@@ -20,7 +20,7 @@
         android:onClick="@{() -> uiModel.onClick()}">
 
         <ImageView
-            android:id="@+id/image_artist_logo"
+            android:id="@+id/image_album_art"
             android:layout_width="@dimen/artist_logo_size"
             android:layout_height="@dimen/artist_logo_size"
             android:layout_marginBottom="@dimen/artist_logo_padding"
@@ -41,10 +41,10 @@
             android:maxLines="2"
             android:ellipsize="end"
             android:gravity="start"
-            app:layout_constraintBottom_toBottomOf="@id/image_artist_logo"
-            app:layout_constraintStart_toEndOf="@id/image_artist_logo"
+            app:layout_constraintBottom_toBottomOf="@id/image_album_art"
+            app:layout_constraintStart_toEndOf="@id/image_album_art"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/image_artist_logo"
+            app:layout_constraintTop_toTopOf="@id/image_album_art"
             tools:text="Metallica"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

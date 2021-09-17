@@ -5,9 +5,10 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.*
 import dagger.hilt.android.testing.*
 import dev.vladimirj.tidal.base.ui.CoroutineDispatcherProvider
-import dev.vladimirj.tidal.search.domain.SearchArtistsResult
+import dev.vladimirj.tidal.search.domain.DomainResult
 import dev.vladimirj.tidal.search.domain.usecase.LoadMoreArtists
 import dev.vladimirj.tidal.search.domain.usecase.SearchArtists
+import dev.vladimirj.tidal.search.ui.SearchNavigator
 import dev.vladimirj.tidal.search.ui.utils.TestCoroutineRule
 import dev.vladimirj.tidal.search.ui.utils.launchFragmentInHiltContainer
 import dev.vladimirj.tidal.search.ui.utils.testDispatcher
@@ -44,6 +45,9 @@ class SearchFragmentShould {
         main = coroutineRule.testDispatcher, io = coroutineRule.testDispatcher
     )
 
+    @BindValue
+    val navigator = mock<SearchNavigator>()
+
     @Test
     fun querySearchArtistsUsecase() = coroutineRule.runBlockingTest {
         launchFragmentInHiltContainer<SearchFragment>()
@@ -58,7 +62,7 @@ class SearchFragmentShould {
 
     @Test
     fun showError_returnedBySearchArtistsUsecase() = coroutineRule.runBlockingTest {
-        val error = SearchArtistsResult.Error("message")
+        val error = DomainResult.Error("message")
         whenever(searchArtists("test")).thenReturn(error)
         launchFragmentInHiltContainer<SearchFragment>()
 

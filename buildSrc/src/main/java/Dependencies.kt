@@ -10,6 +10,7 @@ object Versions {
     const val material_design = "1.2.1"
     const val android_x_work_manager = "2.4.0"
     const val android_x_databinding_compiler = "4.1.0"
+    const val android_x_recycler = "1.2.1"
 
     const val moshi = "1.12.0"
     const val retrofit = "2.9.0"
@@ -51,6 +52,7 @@ object Deps {
     const val constraint_layout = "androidx.constraintlayout:constraintlayout:${Versions.android_x_constraint_layout}"
     const val databinding_compiler = "androidx.databinding:databinding-compiler:${Versions.android_x_databinding_compiler}"
     const val lifecycle = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.android_x_lifecycle}"
+    const val recycler = "androidx.recyclerview:recyclerview:${Versions.android_x_recycler}"
 
     const val moshi = "com.squareup.moshi:moshi:${Versions.moshi}"
     const val moshi_codegen = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}"

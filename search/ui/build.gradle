@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'kotlin-parcelize'
 }
 android {
     compileSdkVersion Versions.compile_sdk
@@ -34,6 +35,7 @@ android {
 
 dependencies {
     implementation project(Modules.baseUi)
+    implementation project(Modules.searchData)
     implementation project(Modules.searchDomain)
 
     implementation Deps.hilt_android

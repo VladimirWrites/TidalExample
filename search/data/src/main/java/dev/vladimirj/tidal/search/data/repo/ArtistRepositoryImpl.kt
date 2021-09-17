@@ -1,23 +1,34 @@
 package dev.vladimirj.tidal.search.data.repo
 
 import dev.vladimirj.tidal.search.data.SearchService
-import dev.vladimirj.tidal.search.data.entity.SearchResponse
+import dev.vladimirj.tidal.search.data.entity.RemoteAlbum
+import dev.vladimirj.tidal.search.data.entity.RemoteArtist
+import dev.vladimirj.tidal.search.data.entity.RemoteResponse
 import dev.vladimirj.tidal.search.domain.entity.Artist
 import dev.vladimirj.tidal.search.domain.repo.ArtistRepository
-import dev.vladimirj.tidal.search.domain.SearchArtistsResult
+import dev.vladimirj.tidal.search.domain.DomainResult
+import dev.vladimirj.tidal.search.domain.entity.Album
 
 class ArtistRepositoryImpl(
     private val searchService: SearchService
 ): ArtistRepository {
-    override suspend fun searchForArtists(searchTerm: String): SearchArtistsResult {
+    override suspend fun searchForArtists(searchTerm: String): DomainResult {
         return getSearchResultsAndMapThem { searchService.search(searchTerm) }
     }
 
-    override suspend fun getMoreSearchResults(url: String): SearchArtistsResult {
+    override suspend fun getMoreSearchResults(url: String): DomainResult {
         return getSearchResultsAndMapThem { searchService.getMoreSearchResults(url) }
     }
 
-    private suspend fun getSearchResultsAndMapThem(provider: (suspend () -> SearchResponse)): SearchArtistsResult {
+    override suspend fun getAlbums(artistId: Long): DomainResult {
+        return getAlbumsAndMapThem { searchService.getAlbums(artistId) }
+    }
+
+    override suspend fun getMoreAlbums(url: String): DomainResult {
+        return getAlbumsAndMapThem { searchService.getMoreAlbums(url) }
+    }
+
+    private suspend fun getSearchResultsAndMapThem(provider: (suspend () -> RemoteResponse<RemoteArtist>)): DomainResult {
         return try {
             val result = provider()
             val listOfArtists = result.data.map {
@@ -27,9 +38,25 @@ class ArtistRepositoryImpl(
                     picture = it.picture
                 )
             }
-            SearchArtistsResult.Success(listOfArtists, result.total, result.next)
+            DomainResult.Success(listOfArtists, result.total, result.next)
         } catch (throwable: Throwable) {
-            SearchArtistsResult.Error(throwable.localizedMessage)
+            DomainResult.Error(throwable.localizedMessage)
+        }
+    }
+
+    private suspend fun getAlbumsAndMapThem(provider: (suspend () -> RemoteResponse<RemoteAlbum>)): DomainResult {
+        return try {
+            val result = provider()
+            val listOfAlbums = result.data.map {
+                Album(
+                    id = it.id,
+                    title = it.title,
+                    cover = it.cover
+                )
+            }
+            DomainResult.Success(listOfAlbums, result.total, result.next)
+        } catch (throwable: Throwable) {
+            DomainResult.Error(throwable.localizedMessage)
         }
     }
 }

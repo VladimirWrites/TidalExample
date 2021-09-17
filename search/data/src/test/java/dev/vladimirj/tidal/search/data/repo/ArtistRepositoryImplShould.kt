@@ -5,9 +5,11 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import dev.vladimirj.tidal.search.data.SearchService
+import dev.vladimirj.tidal.search.data.entity.RemoteAlbum
 import dev.vladimirj.tidal.search.data.entity.RemoteArtist
-import dev.vladimirj.tidal.search.data.entity.SearchResponse
-import dev.vladimirj.tidal.search.domain.SearchArtistsResult
+import dev.vladimirj.tidal.search.data.entity.RemoteResponse
+import dev.vladimirj.tidal.search.domain.DomainResult
+import dev.vladimirj.tidal.search.domain.entity.Album
 import dev.vladimirj.tidal.search.domain.entity.Artist
 import kotlinx.coroutines.test.runBlockingTest
 
@@ -15,7 +17,7 @@ import org.junit.Test
 
 class ArtistRepositoryImplShould {
 
-    private val searchResponseStub = SearchResponse(
+    private val searchResponseStub = RemoteResponse(
         data = listOf(
             RemoteArtist(1, "test1", "url1"),
             RemoteArtist(2, "test2", "url2"),
@@ -25,11 +27,31 @@ class ArtistRepositoryImplShould {
         next = "next.com"
     )
 
-    private val searchArtistsResultStub = SearchArtistsResult.Success(
-        artists = listOf(
+    private val searchArtistsResultStub = DomainResult.Success(
+        data = listOf(
             Artist(1, "test1", "url1"),
             Artist(2, "test2", "url2"),
             Artist(3, "test3", "url3")
+        ),
+        totalSize = 42,
+        next = "next.com"
+    )
+
+    private val albumsResponseStub = RemoteResponse(
+        data = listOf(
+            RemoteAlbum(1, "test1", "url1"),
+            RemoteAlbum(2, "test2", "url2"),
+            RemoteAlbum(3, "test3", "url3")
+        ),
+        total = 42,
+        next = "next.com"
+    )
+
+    private val albumsResultStub = DomainResult.Success(
+        data = listOf(
+            Album(1, "test1", "url1"),
+            Album(2, "test2", "url2"),
+            Album(3, "test3", "url3")
         ),
         totalSize = 42,
         next = "next.com"
@@ -39,7 +61,7 @@ class ArtistRepositoryImplShould {
     private val artistRepository = ArtistRepositoryImpl(searchService)
 
     @Test
-    fun searchForArtists_usingSearchService() = runBlockingTest{
+    fun searchForArtists_usingSearchService() = runBlockingTest {
         val query = "test"
         whenever(searchService.search(query)).thenReturn(searchResponseStub)
 
@@ -49,12 +71,32 @@ class ArtistRepositoryImplShould {
     }
 
     @Test
-    fun mapSearchResponse_toSearchArtistsResult() = runBlockingTest{
+    fun mapSearchResponse_toResults() = runBlockingTest {
         val query = "test"
         whenever(searchService.search(query)).thenReturn(searchResponseStub)
 
         val actual = artistRepository.searchForArtists(query)
 
         assertThat(actual).isEqualTo(searchArtistsResultStub)
+    }
+
+    @Test
+    fun getAlbums_usingSearchService() = runBlockingTest {
+        val artistId = 1L
+        whenever(searchService.getAlbums(artistId)).thenReturn(albumsResponseStub)
+
+        artistRepository.getAlbums(artistId)
+
+        verify(searchService).getAlbums(artistId)
+    }
+
+    @Test
+    fun mapAlbumResponse_toAlbumResult() = runBlockingTest {
+        val artistId = 1L
+        whenever(searchService.getAlbums(artistId)).thenReturn(albumsResponseStub)
+
+        val actual = artistRepository.getAlbums(artistId)
+
+        assertThat(actual).isEqualTo(albumsResultStub)
     }
 }

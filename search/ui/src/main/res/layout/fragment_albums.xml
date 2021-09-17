@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="dev.vladimirj.tidal.search.ui.albums.AlbumsViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:clipToPadding="false"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/Toolbar"
+            app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline4"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_albums"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:goneUnless="@{!viewModel.isProgressVisible()}"
+            app:spanCount="@integer/span_count"
+            android:padding="@dimen/album_card_padding"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            tools:listitem="@layout/item_artist" />
+
+        <ProgressBar
+            android:id="@+id/progress_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:goneUnless="@{viewModel.isProgressVisible()}" />
+    </LinearLayout>
+
+</layout>

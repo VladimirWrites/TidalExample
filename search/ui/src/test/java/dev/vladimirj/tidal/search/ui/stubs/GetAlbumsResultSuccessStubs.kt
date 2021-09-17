@@ -2,20 +2,20 @@ package dev.vladimirj.tidal.search.ui.stubs
 
 import dev.vladimirj.tidal.search.domain.DomainResult
 
-val SEARCH_ARTISTS_RESULT_SUCCESS_1 = DomainResult.Success(
+val ALBUMS_RESULT_SUCCESS_1 = DomainResult.Success(
     data = listOf(
-        ARTIST_1,
-        ARTIST_2,
-        ARTIST_3
+        ALBUM_1,
+        ALBUM_2,
+        ALBUM_3
     ),
     totalSize = 42,
     next = "next.com/1"
 )
 
-val SEARCH_ARTISTS_RESULT_SUCCESS_2 = DomainResult.Success(
+val ALBUMS_RESULT_SUCCESS_2 = DomainResult.Success(
     data = listOf(
-        ARTIST_4,
-        ARTIST_5
+        ALBUM_4,
+        ALBUM_5
     ),
     totalSize = 42,
     next = null

@@ -1,5 +1,6 @@
 package dev.vladimirj.tidal.base.ui
 
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -14,22 +15,44 @@ fun RecyclerView.addOnScrolledToBottom(onScrolledToBottom: () -> Unit) {
 
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
 
-            with(layoutManager as LinearLayoutManager) {
+            when (layoutManager) {
 
-                val visibleItemCount = childCount
-                val totalItemCount = itemCount
-                val firstVisibleItem = findFirstVisibleItemPosition()
+                is LinearLayoutManager -> {
+                    val linearLayoutManager = (layoutManager as LinearLayoutManager)
+                    val visibleItemCount = linearLayoutManager.childCount
+                    val totalItemCount = linearLayoutManager.itemCount
+                    val firstVisibleItem = linearLayoutManager.findFirstVisibleItemPosition()
 
-                if (loading && totalItemCount > previousTotal) {
+                    if (loading && totalItemCount > previousTotal) {
 
-                    loading = false
-                    previousTotal = totalItemCount
+                        loading = false
+                        previousTotal = totalItemCount
+                    }
+
+                    if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold)) {
+
+                        onScrolledToBottom()
+                        loading = true
+                    }
                 }
 
-                if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold)) {
+                is GridLayoutManager -> {
+                    val gridLayoutManager = (layoutManager as GridLayoutManager)
+                    val visibleItemCount = gridLayoutManager.childCount
+                    val totalItemCount = gridLayoutManager.itemCount
+                    val firstVisibleItem = gridLayoutManager.findFirstVisibleItemPosition()
 
-                    onScrolledToBottom()
-                    loading = true
+                    if (loading && totalItemCount > previousTotal) {
+
+                        loading = false
+                        previousTotal = totalItemCount
+                    }
+
+                    if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold)) {
+
+                        onScrolledToBottom()
+                        loading = true
+                    }
                 }
             }
         }

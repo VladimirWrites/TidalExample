@@ -4,4 +4,5 @@
     <dimen name="artist_logo_padding">16dp</dimen>
     <dimen name="search_text_padding">8dp</dimen>
     <dimen name="button_cancel_size">24dp</dimen>
+    <dimen name="album_card_padding">8dp</dimen>
 </resources>

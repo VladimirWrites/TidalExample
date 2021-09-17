@@ -4,10 +4,10 @@ import dev.vladimirj.tidal.search.domain.repo.ArtistRepository
 import dev.vladimirj.tidal.search.domain.DomainResult
 import javax.inject.Inject
 
-class SearchArtists @Inject constructor(
+class GetMoreAlbums @Inject constructor(
     private val artistRepository: ArtistRepository
 ) {
-    suspend operator fun invoke(searchTerm: String): DomainResult {
-        return artistRepository.searchForArtists(searchTerm)
+    suspend operator fun invoke(url: String): DomainResult {
+        return artistRepository.getMoreAlbums(url)
     }
 }

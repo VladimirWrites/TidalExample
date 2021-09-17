@@ -38,6 +38,7 @@ dependencies {
     api Deps.appcompat
     api Deps.core_ktx
     api Deps.fragment
+    api Deps.recycler
 
     implementation Deps.hilt_android
     kapt Deps.hilt_compiler

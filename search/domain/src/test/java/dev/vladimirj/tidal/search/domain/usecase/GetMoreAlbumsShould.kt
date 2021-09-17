@@ -6,20 +6,21 @@ import com.nhaarman.mockitokotlin2.whenever
 import dev.vladimirj.tidal.search.domain.DomainResult
 import dev.vladimirj.tidal.search.domain.repo.ArtistRepository
 import kotlinx.coroutines.test.runBlockingTest
+
 import org.junit.Test
 
-class LoadMoreArtistsShould {
+class GetMoreAlbumsShould {
 
     private val artistRepositoryMock = mock<ArtistRepository>()
-    private val loadMoreArtists = LoadMoreArtists(artistRepositoryMock)
+    private val getMoreAlbums = GetMoreAlbums(artistRepositoryMock)
 
     @Test
     fun returnDataFromRepository() = runBlockingTest {
         val expected = mock<DomainResult>()
         val url = "https://test.com"
-        whenever(artistRepositoryMock.getMoreSearchResults(url)).thenReturn(expected)
+        whenever(artistRepositoryMock.getMoreAlbums(url)).thenReturn(expected)
 
-        val actual = loadMoreArtists(url)
+        val actual = getMoreAlbums(url)
 
         assertThat(actual).isEqualTo(expected)
     }

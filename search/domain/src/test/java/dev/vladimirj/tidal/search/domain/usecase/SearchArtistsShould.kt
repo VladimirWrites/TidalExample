@@ -3,7 +3,7 @@ package dev.vladimirj.tidal.search.domain.usecase
 import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
-import dev.vladimirj.tidal.search.domain.SearchArtistsResult
+import dev.vladimirj.tidal.search.domain.DomainResult
 import dev.vladimirj.tidal.search.domain.repo.ArtistRepository
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
@@ -15,7 +15,7 @@ class SearchArtistsShould {
 
     @Test
     fun returnDataFromRepository() = runBlockingTest {
-        val expected = mock<SearchArtistsResult>()
+        val expected = mock<DomainResult>()
         val query = "test"
         whenever(artistRepositoryMock.searchForArtists(query)).thenReturn(expected)
 

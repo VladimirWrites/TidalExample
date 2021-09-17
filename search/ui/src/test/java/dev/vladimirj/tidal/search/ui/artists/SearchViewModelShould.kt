@@ -37,7 +37,7 @@ class SearchViewModelShould {
         whenever(searchArtists("test")).thenReturn(SEARCH_ARTISTS_RESULT_SUCCESS_1)
         viewModel.searchQuery.set("test")
         testDispatcher.advanceUntilIdle()
-        assertThat(viewModel.searchResults.value!!.size).isEqualTo(SEARCH_ARTISTS_RESULT_SUCCESS_1.artists.size + 1)
+        assertThat(viewModel.searchResults.value!!.size).isEqualTo(SEARCH_ARTISTS_RESULT_SUCCESS_1.data.size + 1)
 
         viewModel.cancelSearch()
 
@@ -52,7 +52,7 @@ class SearchViewModelShould {
         viewModel.searchQuery.set("test")
         testDispatcher.advanceUntilIdle()
 
-        assertThat(viewModel.searchResults.value!!.size).isEqualTo(SEARCH_ARTISTS_RESULT_SUCCESS_1.artists.size + 1)
+        assertThat(viewModel.searchResults.value!!.size).isEqualTo(SEARCH_ARTISTS_RESULT_SUCCESS_1.data.size + 1)
     }
 
     @Test
@@ -61,11 +61,11 @@ class SearchViewModelShould {
         whenever(loadMoreArtists(SEARCH_ARTISTS_RESULT_SUCCESS_1.next!!)).thenReturn(SEARCH_ARTISTS_RESULT_SUCCESS_2)
         viewModel.searchQuery.set("test")
         testDispatcher.advanceUntilIdle()
-        assertThat(viewModel.searchResults.value!!.size).isEqualTo(SEARCH_ARTISTS_RESULT_SUCCESS_1.artists.size + 1)
+        assertThat(viewModel.searchResults.value!!.size).isEqualTo(SEARCH_ARTISTS_RESULT_SUCCESS_1.data.size + 1)
 
         viewModel.loadMore()
 
         testDispatcher.advanceUntilIdle()
-        assertThat(viewModel.searchResults.value!!.size).isEqualTo(SEARCH_ARTISTS_RESULT_SUCCESS_1.artists.size + SEARCH_ARTISTS_RESULT_SUCCESS_2.artists.size + 1)
+        assertThat(viewModel.searchResults.value!!.size).isEqualTo(SEARCH_ARTISTS_RESULT_SUCCESS_1.data.size + SEARCH_ARTISTS_RESULT_SUCCESS_2.data.size + 1)
     }
 }
