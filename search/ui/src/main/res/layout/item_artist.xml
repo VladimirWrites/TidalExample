@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -8,44 +7,44 @@
 
         <variable
             name="uiModel"
-            type="dev.vladimirj.tidal.search.ui.artists.SearchResultsUiModel.ArtistUiModel"/>
+            type="dev.vladimirj.tidal.search.ui.artists.SearchResultsUiModel.ArtistUiModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?selectableItemBackground"
+        android:onClick="@{() -> uiModel.onClick()}"
         android:paddingStart="@dimen/screen_padding"
-        android:paddingEnd="@dimen/screen_padding"
-        android:onClick="@{() -> uiModel.onClick()}">
+        android:paddingEnd="@dimen/screen_padding">
 
         <ImageView
             android:id="@+id/image_album_art"
             android:layout_width="@dimen/artist_logo_size"
             android:layout_height="@dimen/artist_logo_size"
-            android:layout_marginBottom="@dimen/artist_logo_padding"
             android:layout_marginTop="@dimen/artist_logo_padding"
             android:layout_marginEnd="@dimen/artist_logo_padding"
-            app:roundImageUrl="@{uiModel.artist.picture}"
+            android:layout_marginBottom="@dimen/artist_logo_padding"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/text_artist_name"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:roundImageUrl="@{uiModel.artist.picture}" />
 
         <TextView
             android:id="@+id/text_artist_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            android:text="@{uiModel.artist.name}"
-            android:maxLines="2"
             android:ellipsize="end"
             android:gravity="start"
+            android:maxLines="2"
+            android:text="@{uiModel.artist.name}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             app:layout_constraintBottom_toBottomOf="@id/image_album_art"
-            app:layout_constraintStart_toEndOf="@id/image_album_art"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/image_album_art"
             app:layout_constraintTop_toTopOf="@id/image_album_art"
-            tools:text="Metallica"/>
+            tools:text="Metallica" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

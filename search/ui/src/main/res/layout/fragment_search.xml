@@ -63,22 +63,13 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_cancel"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                style="@style/Button.Cancel"
                 android:layout_width="@dimen/button_cancel_size"
                 android:layout_height="@dimen/button_cancel_size"
-                android:insetLeft="0dp"
-                android:insetTop="0dp"
-                android:insetRight="0dp"
-                android:insetBottom="0dp"
                 android:onClick="@{() -> viewModel.cancelSearch()}"
-                android:padding="0dp"
-                app:icon="@drawable/ic_cancel"
-                app:iconPadding="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:shapeAppearanceOverlay="@style/Button.Circle"
-                app:tint="@color/black"
                 tools:ignore="ContentDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

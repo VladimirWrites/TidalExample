@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -8,15 +7,15 @@
 
         <variable
             name="uiModel"
-            type="dev.vladimirj.tidal.search.ui.albums.AlbumUiModel"/>
+            type="dev.vladimirj.tidal.search.ui.albums.AlbumUiModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?selectableItemBackground"
-        android:padding="@dimen/album_card_padding"
-        android:onClick="@{() -> uiModel.onClick()}">
+        android:onClick="@{() -> uiModel.onClick()}"
+        android:padding="@dimen/album_card_padding">
 
         <ImageView
             android:id="@+id/image_album_art"
@@ -24,40 +23,40 @@
             android:layout_height="wrap_content"
             app:imageUrl="@{uiModel.album.cover}"
             app:layout_constraintBottom_toTopOf="@+id/text_title"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            android:text="@{uiModel.album.title}"
-            android:maxLines="1"
             android:ellipsize="end"
             android:gravity="start"
+            android:maxLines="1"
+            android:text="@{uiModel.album.title}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             app:layout_constraintBottom_toTopOf="@id/text_artist_name"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/image_album_art"
-            tools:text="St. Anger"/>
+            tools:text="St. Anger" />
 
         <TextView
             android:id="@+id/text_artist_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-            android:text="@{uiModel.artist.name}"
-            android:maxLines="1"
             android:ellipsize="end"
             android:gravity="start"
             android:textColor="@color/teal_700"
+            android:maxLines="1"
+            android:text="@{uiModel.artist.name}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_title"
-            tools:text="Metallica"/>
+            tools:text="Metallica" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
