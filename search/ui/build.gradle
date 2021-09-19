@@ -35,7 +35,6 @@ android {
 
 dependencies {
     implementation project(Modules.baseUi)
-    implementation project(Modules.searchData)
     implementation project(Modules.searchDomain)
 
     implementation Deps.hilt_android
@@ -44,6 +43,7 @@ dependencies {
     implementation Deps.glide
     kapt Deps.glide_compiler
 
+    testImplementation project(Modules.searchData)
     testImplementation Deps.junit
     testImplementation Deps.truth
     testImplementation Deps.mockito_kotlin
