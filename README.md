@@ -1,5 +1,11 @@
 # Tidal Example
 
+Example project that shows how to create Tidal search functionality using the Deezer API
+
+![Video Example](assets/recording.gif)
+
+To run tests use: `./gradlew testDebugUnitTest`
+
 ## License
 
      Copyright 2021 Vladimir Jovanović
