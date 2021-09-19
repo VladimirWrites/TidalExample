@@ -13,10 +13,12 @@ import dev.vladimirj.tidal.search.domain.DomainResult
 import dev.vladimirj.tidal.search.domain.entity.Album
 import dev.vladimirj.tidal.search.domain.entity.Artist
 import dev.vladimirj.tidal.search.domain.entity.Track
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 
 import org.junit.Test
 
+@ExperimentalCoroutinesApi
 class ArtistRepositoryImplShould {
 
     private val searchResponseStub = RemoteResponse(
