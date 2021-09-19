@@ -42,7 +42,8 @@ class ArtistRepositoryImpl(
             }
             DomainResult.Success(listOfTrack, result.total, result.next)
         } catch (throwable: Throwable) {
-            DomainResult.Error(throwable.localizedMessage)
+
+            DomainResult.Error(throwable.getBestMessage())
         }
     }
 
@@ -58,7 +59,7 @@ class ArtistRepositoryImpl(
             }
             DomainResult.Success(listOfArtists, result.total, result.next)
         } catch (throwable: Throwable) {
-            DomainResult.Error(throwable.localizedMessage)
+            DomainResult.Error(throwable.getBestMessage())
         }
     }
 
@@ -74,7 +75,9 @@ class ArtistRepositoryImpl(
             }
             DomainResult.Success(listOfAlbums, result.total, result.next)
         } catch (throwable: Throwable) {
-            DomainResult.Error(throwable.localizedMessage)
+            DomainResult.Error(throwable.getBestMessage())
         }
     }
+
+    private fun Throwable.getBestMessage(): String = this.localizedMessage ?: this.message ?: "Something went wrong!"
 }
