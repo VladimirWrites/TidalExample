@@ -5,12 +5,12 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import dev.vladimirj.tidal.search.data.SearchService
-import dev.vladimirj.tidal.search.data.entity.RemoteAlbum
+import dev.vladimirj.tidal.search.data.entity.RemoteRecording
 import dev.vladimirj.tidal.search.data.entity.RemoteArtist
 import dev.vladimirj.tidal.search.data.entity.RemoteResponse
 import dev.vladimirj.tidal.search.data.entity.RemoteTrack
 import dev.vladimirj.tidal.search.domain.DomainResult
-import dev.vladimirj.tidal.search.domain.entity.Album
+import dev.vladimirj.tidal.search.domain.entity.Recording
 import dev.vladimirj.tidal.search.domain.entity.Artist
 import dev.vladimirj.tidal.search.domain.entity.Track
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -38,21 +38,21 @@ private val SEARCH_RESULT_RESPONSE_STUB = DomainResult.Success(
     next = "next.com"
 )
 
-private val ALBUMS_RESPONSE_STUB = RemoteResponse(
+private val RECORDING_RESPONSE_STUB = RemoteResponse(
     data = listOf(
-        RemoteAlbum(1, "test1", "url1"),
-        RemoteAlbum(2, "test2", "url2"),
-        RemoteAlbum(3, "test3", "url3")
+        RemoteRecording(1, "test1", "url1", "album"),
+        RemoteRecording(2, "test2", "url2", "single"),
+        RemoteRecording(3, "test3", "url3", "album")
     ),
     total = 42,
     next = "next.com"
 )
 
-private val ALBUMS_RESULT_STUB = DomainResult.Success(
+private val RECORDING_RESULT_STUB = DomainResult.Success(
     data = listOf(
-        Album(1, "test1", "url1"),
-        Album(2, "test2", "url2"),
-        Album(3, "test3", "url3")
+        Recording(1, "test1", "url1", "album"),
+        Recording(2, "test2", "url2", "single"),
+        Recording(3, "test3", "url3", "album")
     ),
     totalSize = 42,
     next = "next.com"
@@ -125,43 +125,43 @@ class ArtistRepositoryImplShould {
     }
 
     @Test
-    fun getAlbums_usingSearchService() = runBlockingTest {
+    fun getRecordings_usingSearchService() = runBlockingTest {
         val artistId = 1L
-        whenever(searchService.getAlbums(artistId)).thenReturn(ALBUMS_RESPONSE_STUB)
+        whenever(searchService.getRecordings(artistId)).thenReturn(RECORDING_RESPONSE_STUB)
 
-        artistRepository.getAlbums(artistId)
+        artistRepository.getRecordings(artistId)
 
-        verify(searchService).getAlbums(artistId)
+        verify(searchService).getRecordings(artistId)
     }
 
     @Test
-    fun mapAlbumResponse_toAlbumResult() = runBlockingTest {
+    fun mapRecordingsResponse_toAlbumResult() = runBlockingTest {
         val artistId = 1L
-        whenever(searchService.getAlbums(artistId)).thenReturn(ALBUMS_RESPONSE_STUB)
+        whenever(searchService.getRecordings(artistId)).thenReturn(RECORDING_RESPONSE_STUB)
 
-        val actual = artistRepository.getAlbums(artistId)
+        val actual = artistRepository.getRecordings(artistId)
 
-        assertThat(actual).isEqualTo(ALBUMS_RESULT_STUB)
+        assertThat(actual).isEqualTo(RECORDING_RESULT_STUB)
     }
 
     @Test
-    fun getMoreAlbums_usingSearchService() = runBlockingTest {
+    fun getMoreRecordings_usingSearchService() = runBlockingTest {
         val url = "https://test.com"
-        whenever(searchService.getMoreAlbums(url)).thenReturn(ALBUMS_RESPONSE_STUB)
+        whenever(searchService.getMoreRecordings(url)).thenReturn(RECORDING_RESPONSE_STUB)
 
-        artistRepository.getMoreAlbums(url)
+        artistRepository.getMoreRecordings(url)
 
-        verify(searchService).getMoreAlbums(url)
+        verify(searchService).getMoreRecordings(url)
     }
 
     @Test
     fun mapGetMoreAlbumsResponse_toAlbumResult() = runBlockingTest {
         val url = "https://test.com"
-        whenever(searchService.getMoreAlbums(url)).thenReturn(ALBUMS_RESPONSE_STUB)
+        whenever(searchService.getMoreRecordings(url)).thenReturn(RECORDING_RESPONSE_STUB)
 
-        val actual = artistRepository.getMoreAlbums(url)
+        val actual = artistRepository.getMoreRecordings(url)
 
-        assertThat(actual).isEqualTo(ALBUMS_RESULT_STUB)
+        assertThat(actual).isEqualTo(RECORDING_RESULT_STUB)
     }
 
     @Test

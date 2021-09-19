@@ -1,6 +1,6 @@
 package dev.vladimirj.tidal.search.data
 
-import dev.vladimirj.tidal.search.data.entity.RemoteAlbum
+import dev.vladimirj.tidal.search.data.entity.RemoteRecording
 import dev.vladimirj.tidal.search.data.entity.RemoteArtist
 import dev.vladimirj.tidal.search.data.entity.RemoteResponse
 import dev.vladimirj.tidal.search.data.entity.RemoteTrack
@@ -21,14 +21,14 @@ interface SearchService {
     ): RemoteResponse<RemoteArtist>
 
     @GET("artist/{artist_id}/albums")
-    suspend fun getAlbums(
+    suspend fun getRecordings(
         @Path("artist_id") artistId: Long
-    ): RemoteResponse<RemoteAlbum>
+    ): RemoteResponse<RemoteRecording>
 
     @GET
-    suspend fun getMoreAlbums(
+    suspend fun getMoreRecordings(
         @Url url: String
-    ): RemoteResponse<RemoteAlbum>
+    ): RemoteResponse<RemoteRecording>
 
     @GET("album/{album_id}/tracks")
     suspend fun getTracks(

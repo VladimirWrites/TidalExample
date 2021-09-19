@@ -1,18 +1,18 @@
 package dev.vladimirj.tidal.search.data.repo
 
 import dev.vladimirj.tidal.search.data.SearchService
-import dev.vladimirj.tidal.search.data.entity.RemoteAlbum
+import dev.vladimirj.tidal.search.data.entity.RemoteRecording
 import dev.vladimirj.tidal.search.data.entity.RemoteArtist
 import dev.vladimirj.tidal.search.data.entity.RemoteResponse
 import dev.vladimirj.tidal.search.domain.entity.Artist
 import dev.vladimirj.tidal.search.domain.repo.ArtistRepository
 import dev.vladimirj.tidal.search.domain.DomainResult
-import dev.vladimirj.tidal.search.domain.entity.Album
+import dev.vladimirj.tidal.search.domain.entity.Recording
 import dev.vladimirj.tidal.search.domain.entity.Track
 
 class ArtistRepositoryImpl(
     private val searchService: SearchService
-): ArtistRepository {
+) : ArtistRepository {
     override suspend fun searchForArtists(searchTerm: String): DomainResult {
         return getSearchResultsAndMapThem { searchService.search(searchTerm) }
     }
@@ -21,12 +21,12 @@ class ArtistRepositoryImpl(
         return getSearchResultsAndMapThem { searchService.getMoreSearchResults(url) }
     }
 
-    override suspend fun getAlbums(artistId: Long): DomainResult {
-        return getAlbumsAndMapThem { searchService.getAlbums(artistId) }
+    override suspend fun getRecordings(artistId: Long): DomainResult {
+        return getRecordingsAndMapThem { searchService.getRecordings(artistId) }
     }
 
-    override suspend fun getMoreAlbums(url: String): DomainResult {
-        return getAlbumsAndMapThem { searchService.getMoreAlbums(url) }
+    override suspend fun getMoreRecordings(url: String): DomainResult {
+        return getRecordingsAndMapThem { searchService.getMoreRecordings(url) }
     }
 
     override suspend fun getTracks(albumId: Long): DomainResult {
@@ -63,14 +63,15 @@ class ArtistRepositoryImpl(
         }
     }
 
-    private suspend fun getAlbumsAndMapThem(provider: (suspend () -> RemoteResponse<RemoteAlbum>)): DomainResult {
+    private suspend fun getRecordingsAndMapThem(provider: (suspend () -> RemoteResponse<RemoteRecording>)): DomainResult {
         return try {
             val result = provider()
             val listOfAlbums = result.data.map {
-                Album(
+                Recording(
                     id = it.id,
                     title = it.title,
-                    cover = it.cover
+                    cover = it.cover,
+                    recordType = it.recordType
                 )
             }
             DomainResult.Success(listOfAlbums, result.total, result.next)
@@ -79,5 +80,6 @@ class ArtistRepositoryImpl(
         }
     }
 
-    private fun Throwable.getBestMessage(): String = this.localizedMessage ?: this.message ?: "Something went wrong!"
+    private fun Throwable.getBestMessage(): String =
+        this.localizedMessage ?: this.message ?: "Something went wrong!"
 }

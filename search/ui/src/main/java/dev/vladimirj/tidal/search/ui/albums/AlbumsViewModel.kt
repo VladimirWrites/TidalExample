@@ -13,8 +13,6 @@ import dev.vladimirj.tidal.search.domain.entity.Album
 import dev.vladimirj.tidal.search.domain.entity.Artist
 import dev.vladimirj.tidal.search.domain.usecase.GetAlbums
 import dev.vladimirj.tidal.search.domain.usecase.GetMoreAlbums
-import dev.vladimirj.tidal.search.ui.artists.SearchViewModel
-import dev.vladimirj.tidal.search.ui.artists.toArtistUiModels
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
