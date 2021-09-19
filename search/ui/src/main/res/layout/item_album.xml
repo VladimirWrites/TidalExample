@@ -21,6 +21,8 @@
             android:id="@+id/image_album_art"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/bg_album_cover"
+            android:adjustViewBounds="true"
             app:imageUrl="@{uiModel.album.cover}"
             app:layout_constraintBottom_toTopOf="@+id/text_title"
             app:layout_constraintEnd_toEndOf="parent"

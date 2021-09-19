@@ -5,8 +5,10 @@
       <map>
         <entry key="..\:/Users/j0v4n/AndroidStudioProjects/TidalExample/app/src/main/res/layout/activity_main.xml" value="0.21829710144927536" />
         <entry key="..\:/Users/j0v4n/AndroidStudioProjects/TidalExample/base/ui/src/main/res/layout/activity_main.xml" value="0.21829710144927536" />
+        <entry key="..\:/Users/j0v4n/AndroidStudioProjects/TidalExample/search/ui/src/main/res/drawable/bg_album_cover.xml" value="0.3394871794871795" />
         <entry key="..\:/Users/j0v4n/AndroidStudioProjects/TidalExample/search/ui/src/main/res/drawable/bg_album_header.xml" value="0.3490740740740741" />
         <entry key="..\:/Users/j0v4n/AndroidStudioProjects/TidalExample/search/ui/src/main/res/drawable/bg_search_input.xml" value="0.3415384615384615" />
+        <entry key="..\:/Users/j0v4n/AndroidStudioProjects/TidalExample/search/ui/src/main/res/drawable/default_album.xml" value="0.3394871794871795" />
         <entry key="..\:/Users/j0v4n/AndroidStudioProjects/TidalExample/search/ui/src/main/res/drawable/ic_launcher_background.xml" value="0.3415384615384615" />
         <entry key="..\:/Users/j0v4n/AndroidStudioProjects/TidalExample/search/ui/src/main/res/drawable/image_placeholder.xml" value="0.3394871794871795" />
         <entry key="..\:/Users/j0v4n/AndroidStudioProjects/TidalExample/search/ui/src/main/res/layout-land/fragment_album_details.xml" value="0.27821869488536155" />

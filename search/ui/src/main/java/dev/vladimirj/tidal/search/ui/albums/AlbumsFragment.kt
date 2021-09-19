@@ -62,7 +62,11 @@ class AlbumsFragment: Fragment(R.layout.fragment_albums) {
             viewModel.loadMore()
         }
 
-        viewModel.loadAlbums(requireArguments().getParcelable<ParcelableArtist>(ARG_ARTIST)!!.toArtist())
+        if(viewModel.albumResults.value.isNullOrEmpty()) {
+            viewModel.loadAlbums(
+                requireArguments().getParcelable<ParcelableArtist>(ARG_ARTIST)!!.toArtist()
+            )
+        }
     }
 
     private fun setupToolbar() {
