@@ -6,6 +6,7 @@ import com.nhaarman.mockitokotlin2.*
 import dagger.hilt.android.testing.*
 import dev.vladimirj.tidal.base.ui.CoroutineDispatcherProvider
 import dev.vladimirj.tidal.search.domain.DomainResult
+import dev.vladimirj.tidal.search.domain.entity.Artist
 import dev.vladimirj.tidal.search.domain.usecase.LoadMoreArtists
 import dev.vladimirj.tidal.search.domain.usecase.SearchArtists
 import dev.vladimirj.tidal.search.ui.SearchNavigator
@@ -70,6 +71,18 @@ class SearchFragmentShould {
             enterQuery("test")
             testDispatcher.advanceUntilIdle()
             checkSnackbarShown(error.message)
+        }
+    }
+
+    @Test
+    fun showEmptyState_whenNoResults() = coroutineRule.runBlockingTest {
+        whenever(searchArtists("test")).thenReturn(DomainResult.Success<Artist>(emptyList(), 0, null))
+        launchFragmentInHiltContainer<SearchFragment>()
+
+        searchScreen {
+            enterQuery("test")
+            testDispatcher.advanceUntilIdle()
+            checkNoResultsViewShown()
         }
     }
 }

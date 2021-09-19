@@ -34,6 +34,8 @@ class AlbumsViewModel @Inject constructor(
 
     val isProgressVisible: ObservableBoolean = ObservableBoolean(false)
 
+    val isNoResultsVisible: ObservableBoolean = ObservableBoolean(false)
+
     fun loadMore() {
         if (!nextResults.isNullOrBlank()) {
             loadMoreAlbums(nextResults!!)
@@ -55,6 +57,12 @@ class AlbumsViewModel @Inject constructor(
                     is DomainResult.Success<*> -> {
                         nextResults = result.next
                         val aggregatedSearchResults = mutableListOf<AlbumUiModel>()
+
+                        if(aggregatedSearchResults.isEmpty()) {
+                            isNoResultsVisible.set(true)
+                        } else {
+                            isNoResultsVisible.set(false)
+                        }
 
                         result.data.forEach {
                             val album = it as Album

@@ -4,4 +4,6 @@
     <string name="artists">Artists</string>
     <string name="albums">Albums</string>
     <string name="volume_count">Volume %d</string>
+    <string name="search_no_results">No results!\nTry searching for something else.</string>
+    <string name="albums_no_results">This artist doesn\'t have published albums!</string>
 </resources>

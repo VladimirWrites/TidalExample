@@ -5,6 +5,8 @@ import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import dev.vladimirj.tidal.base.ui.CoroutineDispatcherProvider
+import dev.vladimirj.tidal.search.domain.DomainResult
+import dev.vladimirj.tidal.search.domain.entity.Album
 import dev.vladimirj.tidal.search.domain.usecase.GetAlbums
 import dev.vladimirj.tidal.search.domain.usecase.GetMoreAlbums
 import dev.vladimirj.tidal.search.ui.stubs.*
@@ -48,5 +50,15 @@ class AlbumsViewModelShould {
         viewModel.loadMore()
 
         assertThat(viewModel.albumResults.value!!.size).isEqualTo(ALBUMS_RESULT_SUCCESS_1.data.size + ALBUMS_RESULT_SUCCESS_2.data.size)
+    }
+
+    @Test
+    fun showEmptyState_whenArtistHasNoAlbums() = runBlockingTest {
+        whenever(getAlbums(ARTIST_1.id)).thenReturn(DomainResult.Success<Album>(emptyList(), 0, null))
+        assertThat(viewModel.isNoResultsVisible.get()).isFalse()
+
+        viewModel.loadAlbums(ARTIST_1)
+
+        assertThat(viewModel.isNoResultsVisible.get()).isTrue()
     }
 }

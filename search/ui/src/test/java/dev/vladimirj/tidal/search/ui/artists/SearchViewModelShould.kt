@@ -5,6 +5,8 @@ import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import dev.vladimirj.tidal.base.ui.CoroutineDispatcherProvider
+import dev.vladimirj.tidal.search.domain.DomainResult
+import dev.vladimirj.tidal.search.domain.entity.Artist
 import dev.vladimirj.tidal.search.domain.usecase.LoadMoreArtists
 import dev.vladimirj.tidal.search.domain.usecase.SearchArtists
 import dev.vladimirj.tidal.search.ui.stubs.SEARCH_ARTISTS_RESULT_SUCCESS_1
@@ -67,5 +69,17 @@ class SearchViewModelShould {
 
         testDispatcher.advanceUntilIdle()
         assertThat(viewModel.searchResults.value!!.size).isEqualTo(SEARCH_ARTISTS_RESULT_SUCCESS_1.data.size + SEARCH_ARTISTS_RESULT_SUCCESS_2.data.size + 1)
+    }
+
+    @Test
+    fun showEmptyState_whenNoSearchResults() = coroutineRule.runBlockingTest {
+        val searchQuery = "search_query"
+        whenever(searchArtists(searchQuery)).thenReturn(DomainResult.Success<Artist>(emptyList(), 0, null))
+        assertThat(viewModel.isNoResultsVisible.get()).isFalse()
+
+        viewModel.searchQuery.set(searchQuery)
+        testDispatcher.advanceUntilIdle()
+
+        assertThat(viewModel.isNoResultsVisible.get()).isTrue()
     }
 }

@@ -35,6 +35,8 @@ class SearchViewModel @Inject constructor(
 
     val isProgressVisible: ObservableBoolean = ObservableBoolean(false)
 
+    val isNoResultsVisible: ObservableBoolean = ObservableBoolean(false)
+
     private val debounceTextInput: (String) -> Unit =
         viewModelScope.debounce(QUERY_DEBOUNCE_INTERVAL_MS, coroutineDispatcherProvider.io) { searchTerm ->
             if (searchTerm.isBlank()) {
@@ -73,9 +75,14 @@ class SearchViewModel @Inject constructor(
                 when (result) {
                     is DomainResult.Success<*> -> {
                         nextResults = result.next
-                        val aggregatedSearchResults = mutableListOf<SearchResultsUiModel>(
-                            SearchResultsUiModel.HeaderUiModel
-                        )
+                        val aggregatedSearchResults = mutableListOf<SearchResultsUiModel>()
+
+                        if(result.data.isNotEmpty()) {
+                            aggregatedSearchResults.add(SearchResultsUiModel.HeaderUiModel)
+                            isNoResultsVisible.set(false)
+                        } else {
+                            isNoResultsVisible.set(true)
+                        }
 
                         result.data.forEach {
                             val artist = it as Artist

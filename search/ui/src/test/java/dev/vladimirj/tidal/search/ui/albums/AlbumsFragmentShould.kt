@@ -6,6 +6,7 @@ import com.nhaarman.mockitokotlin2.*
 import dagger.hilt.android.testing.*
 import dev.vladimirj.tidal.base.ui.CoroutineDispatcherProvider
 import dev.vladimirj.tidal.search.domain.DomainResult
+import dev.vladimirj.tidal.search.domain.entity.Album
 import dev.vladimirj.tidal.search.domain.usecase.GetAlbums
 import dev.vladimirj.tidal.search.domain.usecase.GetMoreAlbums
 import dev.vladimirj.tidal.search.ui.SearchNavigator
@@ -57,6 +58,21 @@ class AlbumsFragmentShould {
 
         albumsScreen {
             checkSnackbarShown(error.message)
+        }
+    }
+
+    @Test
+    fun showEmptyState_whenNoResults() = runBlockingTest {
+        whenever(getAlbums(ARTIST_1.id)).thenReturn(DomainResult.Success<Album>(emptyList(), 0, null))
+
+        launchFragmentInHiltContainer<AlbumsFragment>(
+            bundleOf(
+                "artist" to ARTIST_1.toParcelableArtist()
+            )
+        )
+
+        albumsScreen {
+            checkNoResultsViewShown()
         }
     }
 }
