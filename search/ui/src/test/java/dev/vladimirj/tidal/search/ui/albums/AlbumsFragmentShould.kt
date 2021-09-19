@@ -46,7 +46,7 @@ class AlbumsFragmentShould {
     )
 
     @Test
-    fun showError_returnedByGetAlbumsUsecase() = runBlockingTest {
+    fun showError_whenReturnedByGetAlbumsUsecase() = runBlockingTest {
         val error = DomainResult.Error("message")
         whenever(getAlbums(ARTIST_1.id)).thenReturn(error)
 
@@ -75,4 +75,6 @@ class AlbumsFragmentShould {
             checkNoResultsViewShown()
         }
     }
+
+    // TODO: Add tests to verify that albums are shown when returned by GetAlbums use-case
 }

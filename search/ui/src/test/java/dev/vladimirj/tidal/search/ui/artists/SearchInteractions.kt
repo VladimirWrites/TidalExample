@@ -11,4 +11,5 @@ object SearchInteractions {
     fun cancelButton(): ViewInteraction = onView(withId(R.id.button_cancel))
     fun snackbar(): ViewInteraction = onView(withId(com.google.android.material.R.id.snackbar_text))
     fun noResultsView(): ViewInteraction = onView(withId(R.id.text_no_results))
+    fun searchResults(): ViewInteraction = onView(withId(R.id.recycler_artists))
 }

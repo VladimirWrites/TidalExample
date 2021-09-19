@@ -18,68 +18,68 @@ import kotlinx.coroutines.test.runBlockingTest
 
 import org.junit.Test
 
+private val SEARCH_RESPONSE_STUB = RemoteResponse(
+    data = listOf(
+        RemoteArtist(1, "test1", "url1"),
+        RemoteArtist(2, "test2", "url2"),
+        RemoteArtist(3, "test3", "url3")
+    ),
+    total = 42,
+    next = "next.com"
+)
+
+private val SEARCH_RESULT_RESPONSE_STUB = DomainResult.Success(
+    data = listOf(
+        Artist(1, "test1", "url1"),
+        Artist(2, "test2", "url2"),
+        Artist(3, "test3", "url3")
+    ),
+    totalSize = 42,
+    next = "next.com"
+)
+
+private val ALBUMS_RESPONSE_STUB = RemoteResponse(
+    data = listOf(
+        RemoteAlbum(1, "test1", "url1"),
+        RemoteAlbum(2, "test2", "url2"),
+        RemoteAlbum(3, "test3", "url3")
+    ),
+    total = 42,
+    next = "next.com"
+)
+
+private val ALBUMS_RESULT_STUB = DomainResult.Success(
+    data = listOf(
+        Album(1, "test1", "url1"),
+        Album(2, "test2", "url2"),
+        Album(3, "test3", "url3")
+    ),
+    totalSize = 42,
+    next = "next.com"
+)
+
+private val TRACKS_RESPONSE_STUB = RemoteResponse(
+    data = listOf(
+        RemoteTrack(1, "test1", 1, 1),
+        RemoteTrack(2, "test2", 2, 1),
+        RemoteTrack(3, "test3", 1, 2)
+    ),
+    total = 42,
+    next = "next.com"
+)
+
+private val TRACKS_RESULT_STUB = DomainResult.Success(
+    data = listOf(
+        Track(1, "test1", 1, 1),
+        Track(2, "test2", 2, 1),
+        Track(3, "test3", 1, 2)
+    ),
+    totalSize = 42,
+    next = "next.com"
+)
+
 @ExperimentalCoroutinesApi
 class ArtistRepositoryImplShould {
-
-    private val searchResponseStub = RemoteResponse(
-        data = listOf(
-            RemoteArtist(1, "test1", "url1"),
-            RemoteArtist(2, "test2", "url2"),
-            RemoteArtist(3, "test3", "url3")
-        ),
-        total = 42,
-        next = "next.com"
-    )
-
-    private val searchArtistsResultStub = DomainResult.Success(
-        data = listOf(
-            Artist(1, "test1", "url1"),
-            Artist(2, "test2", "url2"),
-            Artist(3, "test3", "url3")
-        ),
-        totalSize = 42,
-        next = "next.com"
-    )
-
-    private val albumsResponseStub = RemoteResponse(
-        data = listOf(
-            RemoteAlbum(1, "test1", "url1"),
-            RemoteAlbum(2, "test2", "url2"),
-            RemoteAlbum(3, "test3", "url3")
-        ),
-        total = 42,
-        next = "next.com"
-    )
-
-    private val albumsResultStub = DomainResult.Success(
-        data = listOf(
-            Album(1, "test1", "url1"),
-            Album(2, "test2", "url2"),
-            Album(3, "test3", "url3")
-        ),
-        totalSize = 42,
-        next = "next.com"
-    )
-
-    private val tracksResponseStub = RemoteResponse(
-        data = listOf(
-            RemoteTrack(1, "test1", 1, 1),
-            RemoteTrack(2, "test2", 2, 1),
-            RemoteTrack(3, "test3", 1, 2)
-        ),
-        total = 42,
-        next = "next.com"
-    )
-
-    private val tracksResultStub = DomainResult.Success(
-        data = listOf(
-            Track(1, "test1", 1, 1),
-            Track(2, "test2", 2, 1),
-            Track(3, "test3", 1, 2)
-        ),
-        totalSize = 42,
-        next = "next.com"
-    )
 
     private val searchService = mock<SearchService>()
     private val artistRepository = ArtistRepositoryImpl(searchService)
@@ -87,7 +87,7 @@ class ArtistRepositoryImplShould {
     @Test
     fun searchForArtists_usingSearchService() = runBlockingTest {
         val query = "test"
-        whenever(searchService.search(query)).thenReturn(searchResponseStub)
+        whenever(searchService.search(query)).thenReturn(SEARCH_RESPONSE_STUB)
 
         artistRepository.searchForArtists(query)
 
@@ -97,17 +97,37 @@ class ArtistRepositoryImplShould {
     @Test
     fun mapSearchResponse_toResults() = runBlockingTest {
         val query = "test"
-        whenever(searchService.search(query)).thenReturn(searchResponseStub)
+        whenever(searchService.search(query)).thenReturn(SEARCH_RESPONSE_STUB)
 
         val actual = artistRepository.searchForArtists(query)
 
-        assertThat(actual).isEqualTo(searchArtistsResultStub)
+        assertThat(actual).isEqualTo(SEARCH_RESULT_RESPONSE_STUB)
+    }
+
+    @Test
+    fun getMoreSearchResults_usingSearchService() = runBlockingTest {
+        val url = "https://test.com"
+        whenever(searchService.getMoreSearchResults(url)).thenReturn(SEARCH_RESPONSE_STUB)
+
+        artistRepository.getMoreSearchResults(url)
+
+        verify(searchService).getMoreSearchResults(url)
+    }
+
+    @Test
+    fun mapMoreSearchResultsResponse_toResults() = runBlockingTest {
+        val url = "https://test.com"
+        whenever(searchService.getMoreSearchResults(url)).thenReturn(SEARCH_RESPONSE_STUB)
+
+        val actual = artistRepository.getMoreSearchResults(url)
+
+        assertThat(actual).isEqualTo(SEARCH_RESULT_RESPONSE_STUB)
     }
 
     @Test
     fun getAlbums_usingSearchService() = runBlockingTest {
         val artistId = 1L
-        whenever(searchService.getAlbums(artistId)).thenReturn(albumsResponseStub)
+        whenever(searchService.getAlbums(artistId)).thenReturn(ALBUMS_RESPONSE_STUB)
 
         artistRepository.getAlbums(artistId)
 
@@ -117,20 +137,40 @@ class ArtistRepositoryImplShould {
     @Test
     fun mapAlbumResponse_toAlbumResult() = runBlockingTest {
         val artistId = 1L
-        whenever(searchService.getAlbums(artistId)).thenReturn(albumsResponseStub)
+        whenever(searchService.getAlbums(artistId)).thenReturn(ALBUMS_RESPONSE_STUB)
 
         val actual = artistRepository.getAlbums(artistId)
 
-        assertThat(actual).isEqualTo(albumsResultStub)
+        assertThat(actual).isEqualTo(ALBUMS_RESULT_STUB)
+    }
+
+    @Test
+    fun getMoreAlbums_usingSearchService() = runBlockingTest {
+        val url = "https://test.com"
+        whenever(searchService.getMoreAlbums(url)).thenReturn(ALBUMS_RESPONSE_STUB)
+
+        artistRepository.getMoreAlbums(url)
+
+        verify(searchService).getMoreAlbums(url)
+    }
+
+    @Test
+    fun mapGetMoreAlbumsResponse_toAlbumResult() = runBlockingTest {
+        val url = "https://test.com"
+        whenever(searchService.getMoreAlbums(url)).thenReturn(ALBUMS_RESPONSE_STUB)
+
+        val actual = artistRepository.getMoreAlbums(url)
+
+        assertThat(actual).isEqualTo(ALBUMS_RESULT_STUB)
     }
 
     @Test
     fun mapTrackResponse_toTrackResult() = runBlockingTest {
         val albumId = 1L
-        whenever(searchService.getTracks(albumId)).thenReturn(tracksResponseStub)
+        whenever(searchService.getTracks(albumId)).thenReturn(TRACKS_RESPONSE_STUB)
 
         val actual = artistRepository.getTracks(albumId)
 
-        assertThat(actual).isEqualTo(tracksResultStub)
+        assertThat(actual).isEqualTo(TRACKS_RESULT_STUB)
     }
 }

@@ -82,4 +82,6 @@ class SearchViewModelShould {
 
         assertThat(viewModel.isNoResultsVisible.get()).isTrue()
     }
+
+    // TODO: Additional test should be added to check if correct data is correctly mapped by ViewModel
 }

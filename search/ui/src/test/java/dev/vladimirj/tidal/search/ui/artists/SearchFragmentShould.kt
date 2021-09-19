@@ -10,6 +10,7 @@ import dev.vladimirj.tidal.search.domain.entity.Artist
 import dev.vladimirj.tidal.search.domain.usecase.LoadMoreArtists
 import dev.vladimirj.tidal.search.domain.usecase.SearchArtists
 import dev.vladimirj.tidal.search.ui.SearchNavigator
+import dev.vladimirj.tidal.search.ui.stubs.SEARCH_ARTISTS_RESULT_SUCCESS_1
 import dev.vladimirj.tidal.search.ui.utils.TestCoroutineRule
 import dev.vladimirj.tidal.search.ui.utils.launchFragmentInHiltContainer
 import dev.vladimirj.tidal.search.ui.utils.testDispatcher
@@ -62,7 +63,7 @@ class SearchFragmentShould {
     }
 
     @Test
-    fun showError_returnedBySearchArtistsUsecase() = coroutineRule.runBlockingTest {
+    fun showError_whenReturnedBySearchArtistsUsecase() = coroutineRule.runBlockingTest {
         val error = DomainResult.Error("message")
         whenever(searchArtists("test")).thenReturn(error)
         launchFragmentInHiltContainer<SearchFragment>()
@@ -75,7 +76,7 @@ class SearchFragmentShould {
     }
 
     @Test
-    fun showEmptyState_whenNoResults() = coroutineRule.runBlockingTest {
+    fun showNoResultsMessage_whenNoResults() = coroutineRule.runBlockingTest {
         whenever(searchArtists("test")).thenReturn(DomainResult.Success<Artist>(emptyList(), 0, null))
         launchFragmentInHiltContainer<SearchFragment>()
 
@@ -85,4 +86,34 @@ class SearchFragmentShould {
             checkNoResultsViewShown()
         }
     }
+
+    @Test
+    fun removeResults_whenCancelButtonIsPressed() = coroutineRule.runBlockingTest {
+        whenever(searchArtists("test")).thenReturn(SEARCH_ARTISTS_RESULT_SUCCESS_1)
+        launchFragmentInHiltContainer<SearchFragment>()
+
+        searchScreen {
+            enterQuery("test")
+            testDispatcher.advanceUntilIdle()
+            clickCancelButton()
+            testDispatcher.advanceUntilIdle()
+            checkSearchResultsEmpty()
+        }
+    }
+
+    @Test
+    fun hideNoResultsMessage_whenCancelButtonIsPressed() = coroutineRule.runBlockingTest {
+        whenever(searchArtists("test")).thenReturn(SEARCH_ARTISTS_RESULT_SUCCESS_1)
+        launchFragmentInHiltContainer<SearchFragment>()
+
+        searchScreen {
+            enterQuery("test")
+            testDispatcher.advanceUntilIdle()
+            clickCancelButton()
+            testDispatcher.advanceUntilIdle()
+            checkNoResultsViewHidden()
+        }
+    }
+
+    // TODO: Add tests to verify that artists are shown when returned by SearchArtists use-case
 }

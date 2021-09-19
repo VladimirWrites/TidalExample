@@ -47,7 +47,7 @@ class AlbumDetailsFragmentShould {
     )
 
     @Test
-    fun showError_returnedByGetAlbumsUsecase() = runBlockingTest {
+    fun showError_whenReturnedByGetAlbumsUsecase() = runBlockingTest {
         val error = DomainResult.Error("message")
         whenever(getTracks(ARTIST_1.id)).thenReturn(error)
 
@@ -62,4 +62,6 @@ class AlbumDetailsFragmentShould {
             checkSnackbarShown(error.message)
         }
     }
+
+    // TODO: Add tests to verify that tracks are shown when returned by GetTracks use-case
 }
