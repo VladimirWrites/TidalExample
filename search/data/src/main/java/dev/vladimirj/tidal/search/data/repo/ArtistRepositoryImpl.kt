@@ -10,6 +10,8 @@ import dev.vladimirj.tidal.search.domain.entity.Recording
 import dev.vladimirj.tidal.search.domain.entity.Track
 import dev.vladimirj.tidal.search.domain.repo.ArtistRepository
 
+private const val DEFAULT_IMAGE_URL = "https://i.imgur.com/F5GswUG.jpg"
+
 class ArtistRepositoryImpl(
     private val searchService: SearchService
 ) : ArtistRepository {
@@ -70,7 +72,7 @@ class ArtistRepositoryImpl(
                 Recording(
                     id = it.id,
                     title = it.title,
-                    cover = it.cover,
+                    cover = it.cover ?: DEFAULT_IMAGE_URL,
                     recordType = it.recordType
                 )
             }
