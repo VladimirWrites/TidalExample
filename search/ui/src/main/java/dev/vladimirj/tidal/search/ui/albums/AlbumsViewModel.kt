@@ -13,6 +13,8 @@ import dev.vladimirj.tidal.search.domain.entity.Album
 import dev.vladimirj.tidal.search.domain.entity.Artist
 import dev.vladimirj.tidal.search.domain.usecase.GetAlbums
 import dev.vladimirj.tidal.search.domain.usecase.GetMoreAlbums
+import dev.vladimirj.tidal.search.ui.artists.SearchViewModel
+import dev.vladimirj.tidal.search.ui.artists.toArtistUiModels
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -55,22 +57,19 @@ class AlbumsViewModel @Inject constructor(
                 isProgressVisible.set(false)
                 when (result) {
                     is DomainResult.Success<*> -> {
-                        nextResults = result.next
-                        val aggregatedSearchResults = mutableListOf<AlbumUiModel>()
-
-                        if(aggregatedSearchResults.isEmpty()) {
+                        if(result.totalSize == 0) {
                             isNoResultsVisible.set(true)
-                        } else {
-                            isNoResultsVisible.set(false)
+                            return@withContext
                         }
 
-                        result.data.forEach {
-                            val album = it as Album
-                            aggregatedSearchResults.add(album.toAlbumUiModel(currentArtist) {
-                                mutableUiEvents.postValue(Event(UiEvent.GoToTracks(currentArtist, album)))
-                            })
+                        nextResults = result.next
+                        isNoResultsVisible.set(false)
+
+                        val albumUiModels = result.data.map { it as Album }.toAlbumUiModels(currentArtist) {
+                            mutableUiEvents.postValue(Event(UiEvent.GoToTracks(currentArtist, it)))
                         }
-                        mutableAlbumResults.postValue(aggregatedSearchResults)
+
+                        mutableAlbumResults.postValue(albumUiModels)
                     }
                     is DomainResult.Error -> {
                         mutableUiEvents.postValue(Event(UiEvent.ShowError(result.message)))
@@ -91,18 +90,19 @@ class AlbumsViewModel @Inject constructor(
                 isProgressVisible.set(false)
                 when (result) {
                     is DomainResult.Success<*> -> {
-                        val aggregatedSearchResults = if (albumResults.value.isNullOrEmpty())
-                            mutableListOf()
-                        else albumResults.value!!.toMutableList()
+                        if (albumResults.value.isNullOrEmpty() || result.totalSize == 0) {
+                            return@withContext
+                        }
+
+                        val aggregatedSearchResults = albumResults.value!!.toMutableList()
 
                         nextResults = result.next
 
-                        result.data.forEach {
-                            val album = it as Album
-                            aggregatedSearchResults.add(album.toAlbumUiModel(currentArtist) {
-                                mutableUiEvents.postValue(Event(UiEvent.GoToTracks(currentArtist, album)))
-                            })
+                        val albumUiModels = result.data.map { it as Album }.toAlbumUiModels(currentArtist) {
+                            mutableUiEvents.postValue(Event(UiEvent.GoToTracks(currentArtist, it)))
                         }
+                        aggregatedSearchResults.addAll(albumUiModels)
+
                         mutableAlbumResults.postValue(aggregatedSearchResults)
                     }
                     is DomainResult.Error -> {

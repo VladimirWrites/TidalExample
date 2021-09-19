@@ -74,22 +74,26 @@ class SearchViewModel @Inject constructor(
                 isProgressVisible.set(false)
                 when (result) {
                     is DomainResult.Success<*> -> {
-                        nextResults = result.next
-                        val aggregatedSearchResults = mutableListOf<SearchResultsUiModel>()
-
-                        if(result.data.isNotEmpty()) {
-                            aggregatedSearchResults.add(SearchResultsUiModel.HeaderUiModel)
+                        if(searchQuery.get().isNullOrEmpty()) {
                             isNoResultsVisible.set(false)
-                        } else {
+                        } else if(result.totalSize == 0) {
                             isNoResultsVisible.set(true)
+                            mutableSearchResults.postValue(emptyList())
+                            return@withContext
                         }
 
-                        result.data.forEach {
-                            val artist = it as Artist
-                            aggregatedSearchResults.add(artist.toArtistUiModel {
-                                mutableUiEvents.postValue(Event(UiEvent.GoToAlbums(artist)))
-                            })
+                        nextResults = result.next
+                        isNoResultsVisible.set(false)
+
+                        val aggregatedSearchResults = mutableListOf<SearchResultsUiModel>(
+                            SearchResultsUiModel.HeaderUiModel
+                        )
+
+                        val artistUiModels = result.data.map { it as Artist }.toArtistUiModels {
+                            mutableUiEvents.postValue(Event(UiEvent.GoToAlbums(it)))
                         }
+                        aggregatedSearchResults.addAll(artistUiModels)
+
                         mutableSearchResults.postValue(aggregatedSearchResults)
                         mutableUiEvents.postValue(Event(UiEvent.ScrollToTop))
                     }
@@ -112,17 +116,18 @@ class SearchViewModel @Inject constructor(
                 isProgressVisible.set(false)
                 when (result) {
                     is DomainResult.Success<*> -> {
-                        val aggregatedSearchResults = if(searchResults.value.isNullOrEmpty())
-                            mutableListOf<SearchResultsUiModel>(SearchResultsUiModel.HeaderUiModel)
-                        else searchResults.value!!.toMutableList()
+                        if(searchResults.value.isNullOrEmpty()) {
+                            return@withContext
+                        }
+
+                        val aggregatedSearchResults = searchResults.value!!.toMutableList()
                         nextResults = result.next
 
-                        result.data.forEach {
-                            val artist = it as Artist
-                            aggregatedSearchResults.add(artist.toArtistUiModel {
-                                mutableUiEvents.postValue(Event(UiEvent.GoToAlbums(artist)))
-                            })
+                        val artistUiModels = result.data.map { it as Artist }.toArtistUiModels {
+                            mutableUiEvents.postValue(Event(UiEvent.GoToAlbums(it)))
                         }
+                        aggregatedSearchResults.addAll(artistUiModels)
+
                         mutableSearchResults.postValue(aggregatedSearchResults)
                     }
                     is DomainResult.Error -> {

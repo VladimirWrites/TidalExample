@@ -47,29 +47,9 @@ class AlbumDetailsViewModel @Inject constructor(
                 when (result) {
                     is DomainResult.Success<*> -> {
                         nextResults = result.next
-                        val albumDetailsUiModels = mutableListOf<AlbumDetailsUiModel>()
-                        albumDetailsUiModels.add(0, AlbumDetailsUiModel.HeaderUiModel(
-                            album, artist
-                        ))
 
                         val tracks = result.data.map { it as Track }
-                        val groupedByDiskNumber = tracks.groupBy { it.diskNumber }
-
-                        if(groupedByDiskNumber.keys.size == 1) {
-                            tracks.sortedBy { it.trackPosition }.forEach {
-                                albumDetailsUiModels.add(it.toTrackUiModel(artist))
-                            }
-                        } else {
-                            groupedByDiskNumber.keys.toList().sorted().forEach { volumeNumber ->
-                                albumDetailsUiModels.add(AlbumDetailsUiModel.VolumeUiModel(
-                                    volumeNumber
-                                ))
-                                groupedByDiskNumber[volumeNumber]!!.sortedBy { it.trackPosition }.forEach {
-                                    albumDetailsUiModels.add(it.toTrackUiModel(artist))
-                                }
-                            }
-                        }
-
+                        val albumDetailsUiModels =  tracks.toAlbumDetailsModels(album, artist)
                         mutableAlbumResults.postValue(albumDetailsUiModels)
                     }
                     is DomainResult.Error -> {
