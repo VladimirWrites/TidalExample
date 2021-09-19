@@ -10,10 +10,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.vladimirj.tidal.base.ui.addOnScrolledToBottom
 import dev.vladimirj.tidal.base.ui.observe
 import dev.vladimirj.tidal.base.ui.observeEvent
-import dev.vladimirj.tidal.search.ui.albums.AlbumsViewModel.UiEvent.ShowError
 import dev.vladimirj.tidal.search.ui.R
 import dev.vladimirj.tidal.search.ui.SearchNavigator
 import dev.vladimirj.tidal.search.ui.albums.AlbumsViewModel.UiEvent.GoToTracks
+import dev.vladimirj.tidal.search.ui.albums.AlbumsViewModel.UiEvent.ShowError
 import dev.vladimirj.tidal.search.ui.artists.ParcelableArtist
 import dev.vladimirj.tidal.search.ui.artists.toArtist
 import dev.vladimirj.tidal.search.ui.artists.toParcelableArtist
@@ -23,7 +23,7 @@ import javax.inject.Inject
 private const val ARG_ARTIST = "artist"
 
 @AndroidEntryPoint
-class AlbumsFragment: Fragment(R.layout.fragment_albums) {
+class AlbumsFragment : Fragment(R.layout.fragment_albums) {
 
     private val viewModel by viewModels<AlbumsViewModel>()
     private lateinit var binding: FragmentAlbumsBinding
@@ -62,7 +62,7 @@ class AlbumsFragment: Fragment(R.layout.fragment_albums) {
             viewModel.loadMore()
         }
 
-        if(viewModel.albumResults.value.isNullOrEmpty()) {
+        if (viewModel.albumResults.value.isNullOrEmpty()) {
             viewModel.loadAlbums(
                 requireArguments().getParcelable<ParcelableArtist>(ARG_ARTIST)!!.toArtist()
             )

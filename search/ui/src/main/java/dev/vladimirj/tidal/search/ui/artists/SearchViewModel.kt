@@ -9,9 +9,9 @@ import dev.vladimirj.tidal.base.ui.Event
 import dev.vladimirj.tidal.base.ui.addOnPropertyChanged
 import dev.vladimirj.tidal.base.ui.debounce
 import dev.vladimirj.tidal.search.domain.DomainResult
+import dev.vladimirj.tidal.search.domain.entity.Artist
 import dev.vladimirj.tidal.search.domain.usecase.LoadMoreArtists
 import dev.vladimirj.tidal.search.domain.usecase.SearchArtists
-import dev.vladimirj.tidal.search.domain.entity.Artist
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -25,7 +25,7 @@ class SearchViewModel @Inject constructor(
     private val coroutineDispatcherProvider: CoroutineDispatcherProvider
 ) : ViewModel() {
 
-    private var nextResults: String?  = null
+    private var nextResults: String? = null
 
     private val mutableUiEvents = MutableLiveData<Event<UiEvent>>()
     val uiEvents: LiveData<Event<UiEvent>> = mutableUiEvents
@@ -58,7 +58,7 @@ class SearchViewModel @Inject constructor(
     }
 
     fun loadMore() {
-        if(!nextResults.isNullOrBlank()) {
+        if (!nextResults.isNullOrBlank()) {
             loadMoreSearchResults(nextResults!!)
         }
     }
@@ -74,9 +74,9 @@ class SearchViewModel @Inject constructor(
                 isProgressVisible.set(false)
                 when (result) {
                     is DomainResult.Success<*> -> {
-                        if(searchQuery.get().isNullOrEmpty()) {
+                        if (searchQuery.get().isNullOrEmpty()) {
                             isNoResultsVisible.set(false)
-                        } else if(result.totalSize == 0) {
+                        } else if (result.totalSize == 0) {
                             isNoResultsVisible.set(true)
                             mutableSearchResults.postValue(emptyList())
                             return@withContext
@@ -116,7 +116,7 @@ class SearchViewModel @Inject constructor(
                 isProgressVisible.set(false)
                 when (result) {
                     is DomainResult.Success<*> -> {
-                        if(searchResults.value.isNullOrEmpty()) {
+                        if (searchResults.value.isNullOrEmpty()) {
                             return@withContext
                         }
 

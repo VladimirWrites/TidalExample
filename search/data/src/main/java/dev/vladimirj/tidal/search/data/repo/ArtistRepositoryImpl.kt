@@ -1,14 +1,14 @@
 package dev.vladimirj.tidal.search.data.repo
 
 import dev.vladimirj.tidal.search.data.SearchService
-import dev.vladimirj.tidal.search.data.entity.RemoteRecording
 import dev.vladimirj.tidal.search.data.entity.RemoteArtist
+import dev.vladimirj.tidal.search.data.entity.RemoteRecording
 import dev.vladimirj.tidal.search.data.entity.RemoteResponse
-import dev.vladimirj.tidal.search.domain.entity.Artist
-import dev.vladimirj.tidal.search.domain.repo.ArtistRepository
 import dev.vladimirj.tidal.search.domain.DomainResult
+import dev.vladimirj.tidal.search.domain.entity.Artist
 import dev.vladimirj.tidal.search.domain.entity.Recording
 import dev.vladimirj.tidal.search.domain.entity.Track
+import dev.vladimirj.tidal.search.domain.repo.ArtistRepository
 
 class ArtistRepositoryImpl(
     private val searchService: SearchService

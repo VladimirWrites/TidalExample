@@ -55,7 +55,7 @@ class AlbumsViewModel @Inject constructor(
                 isProgressVisible.set(false)
                 when (result) {
                     is DomainResult.Success<*> -> {
-                        if(result.totalSize == 0) {
+                        if (result.totalSize == 0) {
                             isNoResultsVisible.set(true)
                             return@withContext
                         }

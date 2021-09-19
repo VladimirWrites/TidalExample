@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-class  RemoteResponse<T>(
+class RemoteResponse<T>(
     @Json(name = "data")
     val data: List<T>,
     @Json(name = "total")

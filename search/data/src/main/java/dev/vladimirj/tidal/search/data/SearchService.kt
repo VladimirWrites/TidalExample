@@ -1,7 +1,7 @@
 package dev.vladimirj.tidal.search.data
 
-import dev.vladimirj.tidal.search.data.entity.RemoteRecording
 import dev.vladimirj.tidal.search.data.entity.RemoteArtist
+import dev.vladimirj.tidal.search.data.entity.RemoteRecording
 import dev.vladimirj.tidal.search.data.entity.RemoteResponse
 import dev.vladimirj.tidal.search.data.entity.RemoteTrack
 import retrofit2.http.GET

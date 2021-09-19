@@ -8,7 +8,10 @@ fun <T : Any, L : LiveData<T>> LifecycleOwner.observe(liveData: L, body: (T?) ->
     liveData.observe(this, Observer(body))
 }
 
-fun <T : Any, L : LiveData<Event<T>>> LifecycleOwner.observeEvent(eventLiveData: L, body: (T) -> Unit) {
+fun <T : Any, L : LiveData<Event<T>>> LifecycleOwner.observeEvent(
+    eventLiveData: L,
+    body: (T) -> Unit
+) {
     eventLiveData.observe(
         this,
         EventObserver {

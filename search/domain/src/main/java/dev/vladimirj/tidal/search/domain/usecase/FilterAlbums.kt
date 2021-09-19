@@ -8,7 +8,7 @@ import javax.inject.Inject
 class FilterAlbums @Inject constructor() {
     operator fun invoke(recordings: DomainResult.Success<*>): DomainResult.Success<Album> {
         return DomainResult.Success(
-            data = recordings.data.map{it as Recording}.filter { it.recordType == "album" }.map {
+            data = recordings.data.map { it as Recording }.filter { it.recordType == "album" }.map {
                 Album(
                     id = it.id,
                     title = it.title,

@@ -49,7 +49,7 @@ class AlbumDetailsViewModel @Inject constructor(
                         nextResults = result.next
 
                         val tracks = result.data.map { it as Track }
-                        val albumDetailsUiModels =  tracks.toAlbumDetailsModels(album, artist)
+                        val albumDetailsUiModels = tracks.toAlbumDetailsModels(album, artist)
                         mutableAlbumResults.postValue(albumDetailsUiModels)
                     }
                     is DomainResult.Error -> {

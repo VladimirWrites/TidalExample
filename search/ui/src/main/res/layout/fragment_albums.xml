@@ -22,16 +22,16 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:theme="@style/Toolbar"
-            app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline4"/>
+            app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline4" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_albums"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:goneUnless="@{!viewModel.isProgressVisible()}"
-            app:spanCount="@integer/span_count"
             android:padding="@dimen/album_card_padding"
+            app:goneUnless="@{!viewModel.isProgressVisible()}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="@integer/span_count"
             tools:listitem="@layout/item_artist" />
 
         <ProgressBar
@@ -45,11 +45,11 @@
             android:id="@+id/text_no_results"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/screen_padding"
             android:gravity="center"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:padding="@dimen/screen_padding"
             android:text="@string/albums_no_results"
-            app:goneUnless="@{viewModel.isNoResultsVisible}"/>
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            app:goneUnless="@{viewModel.isNoResultsVisible}" />
 
     </LinearLayout>
 

@@ -2,12 +2,12 @@ package dev.vladimirj.tidal
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import dev.vladimirj.tidal.search.ui.artists.SearchFragment
 import dev.vladimirj.tidal.search.ui.SearchNavigator
 import dev.vladimirj.tidal.search.ui.album.AlbumDetailsFragment
 import dev.vladimirj.tidal.search.ui.albums.AlbumsFragment
 import dev.vladimirj.tidal.search.ui.albums.ParcelableAlbum
 import dev.vladimirj.tidal.search.ui.artists.ParcelableArtist
+import dev.vladimirj.tidal.search.ui.artists.SearchFragment
 
 class SearchNavigatorImpl : SearchNavigator {
 
@@ -43,7 +43,7 @@ class SearchNavigatorImpl : SearchNavigator {
         ft.setCustomAnimations(
             R.anim.slide_in_right,
             R.anim.slide_out_left,
-            R.anim.slide_in_left ,
+            R.anim.slide_in_left,
             R.anim.slide_out_right
         )
 

@@ -36,10 +36,10 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="top"
             android:background="@color/transparent"
             android:theme="@style/Toolbar"
-            android:layout_gravity="top"
-            app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline4"/>
+            app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline4" />
     </FrameLayout>
 
 </layout>

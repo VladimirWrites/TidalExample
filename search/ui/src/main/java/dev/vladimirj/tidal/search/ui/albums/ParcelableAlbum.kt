@@ -9,7 +9,7 @@ data class ParcelableAlbum(
     val id: Long,
     val title: String,
     val cover: String
-): Parcelable
+) : Parcelable
 
 fun ParcelableAlbum.toAlbum() = Album(
     id = this.id,

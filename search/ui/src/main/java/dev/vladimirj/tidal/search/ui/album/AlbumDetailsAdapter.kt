@@ -14,9 +14,9 @@ class AlbumDetailsAdapter : DataBindingRecyclerAdapter<AlbumDetailsUiModel>(Diff
         ): Boolean {
             return if (oldItem is AlbumDetailsUiModel.TrackUiModel && newItem is AlbumDetailsUiModel.TrackUiModel) {
                 oldItem.track.id == newItem.track.id
-            } else if(oldItem is AlbumDetailsUiModel.HeaderUiModel && newItem is AlbumDetailsUiModel.HeaderUiModel) {
+            } else if (oldItem is AlbumDetailsUiModel.HeaderUiModel && newItem is AlbumDetailsUiModel.HeaderUiModel) {
                 oldItem.album.id == newItem.album.id
-            } else if(oldItem is AlbumDetailsUiModel.VolumeUiModel && newItem is AlbumDetailsUiModel.VolumeUiModel){
+            } else if (oldItem is AlbumDetailsUiModel.VolumeUiModel && newItem is AlbumDetailsUiModel.VolumeUiModel) {
                 oldItem.volumeNumber == newItem.volumeNumber
             } else {
                 false

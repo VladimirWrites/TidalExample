@@ -1,7 +1,8 @@
 package dev.vladimirj.tidal.search.ui.albums
 
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import dev.vladimirj.tidal.search.ui.albums.AlbumsInteractions.noResultsView
 import dev.vladimirj.tidal.search.ui.albums.AlbumsInteractions.snackbar
 

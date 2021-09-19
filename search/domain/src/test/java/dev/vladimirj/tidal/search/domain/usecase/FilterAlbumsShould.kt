@@ -14,7 +14,7 @@ class FilterAlbumsShould {
     fun filterOutEverythingThatIsNotAlbum() {
         val expected = ALBUM_RESULT_STUB
 
-        val actual  = filterAlbums(RECORDING_RESULT_STUB)
+        val actual = filterAlbums(RECORDING_RESULT_STUB)
 
         assertThat(actual).isEqualTo(expected)
     }

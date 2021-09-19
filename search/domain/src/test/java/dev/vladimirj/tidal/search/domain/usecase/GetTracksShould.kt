@@ -23,6 +23,6 @@ class GetTracksShould {
 
         val actual = getTracks(albumId)
 
-       assertThat(actual).isEqualTo(expected)
+        assertThat(actual).isEqualTo(expected)
     }
 }

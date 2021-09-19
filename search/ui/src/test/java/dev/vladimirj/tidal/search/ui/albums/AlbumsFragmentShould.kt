@@ -2,8 +2,12 @@ package dev.vladimirj.tidal.search.ui.albums
 
 import android.os.Build
 import androidx.core.os.bundleOf
-import com.nhaarman.mockitokotlin2.*
-import dagger.hilt.android.testing.*
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.whenever
+import dagger.hilt.android.testing.BindValue
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
+import dagger.hilt.android.testing.HiltTestApplication
 import dev.vladimirj.tidal.base.ui.CoroutineDispatcherProvider
 import dev.vladimirj.tidal.search.domain.DomainResult
 import dev.vladimirj.tidal.search.domain.entity.Album

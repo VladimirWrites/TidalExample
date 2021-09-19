@@ -9,7 +9,7 @@ class ParcelableArtist(
     val id: Long,
     val name: String,
     val picture: String
-): Parcelable
+) : Parcelable
 
 
 fun ParcelableArtist.toArtist() = Artist(

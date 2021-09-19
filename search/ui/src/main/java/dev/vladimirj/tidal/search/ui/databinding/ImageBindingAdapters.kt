@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 @BindingAdapter("imageUrl")
 fun ImageView.imageUrl(imageUrl: String?) {
     setImageDrawable(null)
-    if(!imageUrl.isNullOrBlank()) {
+    if (!imageUrl.isNullOrBlank()) {
         Glide.with(this)
             .load(imageUrl)
             .into(this)
@@ -17,7 +17,7 @@ fun ImageView.imageUrl(imageUrl: String?) {
 @BindingAdapter("roundImageUrl")
 fun ImageView.roundImageUrl(imageUrl: String?) {
     setImageDrawable(null)
-    if(!imageUrl.isNullOrBlank()) {
+    if (!imageUrl.isNullOrBlank()) {
         Glide.with(this)
             .load(imageUrl)
             .circleCrop()

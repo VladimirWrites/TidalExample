@@ -4,8 +4,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import dev.vladimirj.tidal.base.ui.CoroutineDispatcherProvider
 import dev.vladimirj.tidal.SearchNavigatorImpl
+import dev.vladimirj.tidal.base.ui.CoroutineDispatcherProvider
 import dev.vladimirj.tidal.search.ui.SearchNavigator
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton

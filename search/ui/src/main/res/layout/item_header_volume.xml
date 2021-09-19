@@ -23,12 +23,12 @@
             android:text="@{@string/volume_count(uiModel.volumeNumber)}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             android:textStyle="bold"
-            tools:text="Volume 1"/>
+            tools:text="Volume 1" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/teal_700"/>
+            android:background="@color/teal_700" />
 
     </LinearLayout>
 

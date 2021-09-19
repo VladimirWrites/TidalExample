@@ -44,6 +44,7 @@
                 android:layout_height="match_parent"
                 android:autofillHints="@null"
                 android:background="@null"
+                android:focusableInTouchMode="true"
                 android:hint="@string/hint_search"
                 android:importantForAutofill="no"
                 android:inputType="textCapWords"
@@ -53,12 +54,12 @@
                 android:text="@={viewModel.searchQuery}"
                 android:textColor="@color/black"
                 android:textColorHint="@color/teal_700"
-                android:focusableInTouchMode="true"
                 app:layout_constraintLeft_toRightOf="@id/icon_search"
                 app:layout_constraintRight_toLeftOf="@id/button_cancel"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="visible" >
-                <requestFocus/>
+                tools:visibility="visible">
+
+                <requestFocus />
             </EditText>
 
             <com.google.android.material.button.MaterialButton
@@ -93,11 +94,11 @@
             android:id="@+id/text_no_results"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/screen_padding"
             android:gravity="center"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:padding="@dimen/screen_padding"
             android:text="@string/search_no_results"
-            app:goneUnless="@{viewModel.isNoResultsVisible}"/>
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            app:goneUnless="@{viewModel.isNoResultsVisible}" />
 
     </LinearLayout>
 

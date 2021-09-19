@@ -1,9 +1,9 @@
-<manifest package="dev.vladimirj.base.ui"
-        xmlns:android="http://schemas.android.com/apk/res/android">
-    <application
-            android:theme="@style/Theme.TidalExample">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="dev.vladimirj.base.ui">
+
+    <application android:theme="@style/Theme.TidalExample">
         <activity
             android:name=".HiltTestActivity"
-            android:exported="false"  />
+            android:exported="false" />
     </application>
 </manifest>

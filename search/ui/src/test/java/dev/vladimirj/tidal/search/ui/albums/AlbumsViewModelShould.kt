@@ -9,7 +9,9 @@ import dev.vladimirj.tidal.search.domain.DomainResult
 import dev.vladimirj.tidal.search.domain.entity.Album
 import dev.vladimirj.tidal.search.domain.usecase.GetAlbums
 import dev.vladimirj.tidal.search.domain.usecase.GetMoreAlbums
-import dev.vladimirj.tidal.search.ui.stubs.*
+import dev.vladimirj.tidal.search.ui.stubs.ALBUMS_RESULT_SUCCESS_1
+import dev.vladimirj.tidal.search.ui.stubs.ALBUMS_RESULT_SUCCESS_2
+import dev.vladimirj.tidal.search.ui.stubs.ARTIST_1
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest

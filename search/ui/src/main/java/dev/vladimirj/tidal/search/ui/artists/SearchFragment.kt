@@ -9,10 +9,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.vladimirj.tidal.base.ui.addOnScrolledToBottom
 import dev.vladimirj.tidal.base.ui.observe
 import dev.vladimirj.tidal.base.ui.observeEvent
-import dev.vladimirj.tidal.search.ui.databinding.FragmentSearchBinding
 import dev.vladimirj.tidal.search.ui.R
 import dev.vladimirj.tidal.search.ui.SearchNavigator
 import dev.vladimirj.tidal.search.ui.artists.SearchViewModel.UiEvent.*
+import dev.vladimirj.tidal.search.ui.databinding.FragmentSearchBinding
 import javax.inject.Inject
 
 @AndroidEntryPoint

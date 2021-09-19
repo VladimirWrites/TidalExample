@@ -1,7 +1,7 @@
 package dev.vladimirj.tidal.search.domain.usecase
 
-import dev.vladimirj.tidal.search.domain.repo.ArtistRepository
 import dev.vladimirj.tidal.search.domain.DomainResult
+import dev.vladimirj.tidal.search.domain.repo.ArtistRepository
 import javax.inject.Inject
 
 class SearchArtists @Inject constructor(

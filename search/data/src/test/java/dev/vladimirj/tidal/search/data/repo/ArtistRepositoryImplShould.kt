@@ -5,17 +5,16 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import dev.vladimirj.tidal.search.data.SearchService
-import dev.vladimirj.tidal.search.data.entity.RemoteRecording
 import dev.vladimirj.tidal.search.data.entity.RemoteArtist
+import dev.vladimirj.tidal.search.data.entity.RemoteRecording
 import dev.vladimirj.tidal.search.data.entity.RemoteResponse
 import dev.vladimirj.tidal.search.data.entity.RemoteTrack
 import dev.vladimirj.tidal.search.domain.DomainResult
-import dev.vladimirj.tidal.search.domain.entity.Recording
 import dev.vladimirj.tidal.search.domain.entity.Artist
+import dev.vladimirj.tidal.search.domain.entity.Recording
 import dev.vladimirj.tidal.search.domain.entity.Track
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
-
 import org.junit.Test
 
 private val SEARCH_RESPONSE_STUB = RemoteResponse(

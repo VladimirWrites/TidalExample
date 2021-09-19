@@ -10,7 +10,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.vladimirj.tidal.base.ui.observe
 import dev.vladimirj.tidal.base.ui.observeEvent
 import dev.vladimirj.tidal.search.ui.R
-import dev.vladimirj.tidal.search.ui.albums.*
+import dev.vladimirj.tidal.search.ui.albums.ParcelableAlbum
+import dev.vladimirj.tidal.search.ui.albums.toAlbum
 import dev.vladimirj.tidal.search.ui.artists.ParcelableArtist
 import dev.vladimirj.tidal.search.ui.artists.toArtist
 import dev.vladimirj.tidal.search.ui.databinding.FragmentAlbumDetailsBinding
@@ -19,7 +20,7 @@ private const val ARG_ARTIST = "artist"
 private const val ARG_ALBUM = "album"
 
 @AndroidEntryPoint
-class AlbumDetailsFragment: Fragment(R.layout.fragment_album_details) {
+class AlbumDetailsFragment : Fragment(R.layout.fragment_album_details) {
 
     private val viewModel by viewModels<AlbumDetailsViewModel>()
     private lateinit var binding: FragmentAlbumDetailsBinding
